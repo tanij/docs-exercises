@@ -1,0 +1,50 @@
+
+
+
+- ROSNode library
+
+
+
+concepts.yaml
+
+ros-knowledge:
+    requires: ros-*
+    description: |
+        The ability to master all of ROS.
+
+
+ros-subscriptions:
+    description: |
+        Knowing how the ROS subscriptions work.
+
+
+# nodes
+
+
+tutorial1:
+    provides: ros-subscriptions
+
+tutorial2:
+    contents:
+    provides: ros-subscriptions
+
+exercise1:
+    verifies: ros-subscriptions
+
+
+
+node.parameters.yaml
+
+    param1:
+        type: Int
+        default: 640
+        description: This is the width of the camera image.
+
+
+code:
+
+    def init(self):
+
+        self.config.param1
+
+node.subscriptions.yaml
