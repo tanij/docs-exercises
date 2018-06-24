@@ -62,6 +62,6 @@ with pixels. -AC
 
 ### Write an image to a file
 
-The [`duckietown_utils`](http://purl.org/dth/duckietown-utils-library)
-package provides the utility function [`write_image_as_jpg()`](#duckietown_utils-write_image_as_jpg)
+The [`duckietown_utils`](+software_devel#duckietown-utils-library)
+package provides the utility function [`write_image_as_jpg()`](+software_devel#duckietown_utils-write_image_as_jpg)
 that writes an image to a JPEG file.

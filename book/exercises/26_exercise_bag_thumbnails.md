@@ -43,7 +43,7 @@ You should be able to get a total of 653 frames out of it.
 
 ### Read image from a topic
 
-The [`duckietown_utils`](#duckietown-utils-library)
+The [`duckietown_utils`](+software_devel#duckietown-utils-library)
 package provides the utility function [`rgb_from_ros()`](#duckietown_utils-rgb_from_ros)
 that processes a ROS message and returns the RGB image it contains (if any).
 
