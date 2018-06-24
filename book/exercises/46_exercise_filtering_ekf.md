@@ -23,7 +23,7 @@ Create a ROS node and package that takes as input the list of line segments dete
     duckiebot $ source ![DUCKIETOWN_ROOT]/set_vehicle.name.sh
     duckiebot $ roslaunch dt_filtering_![ROBOT_NAME] lane_following.launch
     
-and then follow the instructions in [](#checkoff_navigation) for trying the lane following demo. 
+and then follow the instructions in [](+class_fall_2017#checkoff_navigation) for trying the lane following demo. 
 
 You should definitely look at the existing histogram filter for inspiration.
 

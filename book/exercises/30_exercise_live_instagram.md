@@ -8,7 +8,7 @@ Assigned: Andrea Daniele
 
 ## Instructions
 
-You may find useful: [](#ros-python-howto).
+You may find useful: [](+software_devel#ros-python-howto).
 That tutorial is about listening to text messages and writing back
 text messages. Here, we apply the same principle, but to images.
 
