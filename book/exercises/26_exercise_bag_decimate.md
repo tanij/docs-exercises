@@ -49,6 +49,6 @@ A ROS bag instantiated in *write* mode accepts messages through the function
 
 To check that the program works, you can compute the statistics
 of the data using the program `dt-bag-analyze` that you have created
-in [](#exercise-bag-analysis).
+in [](+exercises#exercise-bag-analysis).
 
 You should see that the statistics have changed.

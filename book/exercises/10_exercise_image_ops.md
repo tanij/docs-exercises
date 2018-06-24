@@ -14,7 +14,7 @@ Assigned: Andrea Daniele
 
 Create an implementation of the program `dt-image-flip0`, specified below.
 
-If this exercise is too easy for you, skip to [](#exercise-specifications).
+If this exercise is too easy for you, skip to [](+exercises#exercise-specifications).
 
 
 ## Specification of `dt-image-flip0`

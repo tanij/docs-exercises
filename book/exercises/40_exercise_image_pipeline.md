@@ -28,7 +28,7 @@ The inverse pipeline looks like this:
 
 
 * Do intrinsics/extrinsics camera calibration of your robot as per the instructions.
-* Write the ROS node specified below in [](#exercise-augmented-reality-spec).
+* Write the ROS node specified below in [](+exercises#exercise-augmented-reality-spec).
 
 
 Then verify the results in the following 3 situations.
@@ -66,7 +66,7 @@ In this assignment you will be writing a ROS package to perform the augmented re
 
     $ roslaunch dt_augmented_reality-![robot name] augmenter.launch map_file:=![map file] robot_name:=![robot name] local:=1
 
-where `![map file]` is a YAML file containing the map (specified in [](#exercise-augmented-reality-map)).
+where `![map file]` is a YAML file containing the map (specified in [](+exercises#exercise-augmented-reality-map)).
 
 If `![robot name]` is not given, it defaults to the hostname.
 
