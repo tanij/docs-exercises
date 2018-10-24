@@ -142,7 +142,7 @@ laptop $ docker -H ![hostname].local run -it --net host --privileged -v /data:/d
 Once this is running, launch the controller inside the container with:
 
 ```markduck
-laptop-container $ roslaunch duckietown_demos lane_following.launch /exercise/sampling_factor:=1.0 /exercise/time_delay:=0.0 /exercise/omega_sat=100
+laptop-container $ roslaunch duckietown_demos lane_following_exercise.launch /exercise/sampling_factor:=1.0 /exercise/time_delay:=0.0 /exercise/omega_sat=100
 ```
 
 *On your laptop*
