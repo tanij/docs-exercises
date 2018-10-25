@@ -172,4 +172,4 @@ container $ vim ![your/path]/[your file]
 ## References
 
 
-This exercise is adapted from the [Lane Following Demo](#demo-lane-following) so look there if something in this exercise is unclear. Deliverables are TBD but most likely your controller.py
+This exercise is adapted from the [Lane Following Demo](http://docs.duckietown.org/DT18/opmanual_duckiebot/out/demo_lane_following.html) so look there if something in this exercise is unclear. Deliverables are TBD but most likely your controller.py
