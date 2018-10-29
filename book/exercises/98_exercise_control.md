@@ -103,56 +103,63 @@ For this exercise, we will use a different controller rather than the standard o
 
 
 
-## Get the template
+## Get the Code
 
 Pull the code from
-[https://github.com/raabuchanan/Software/tree/sysid-into-master-merge](https://github.com/raabuchanan/Software/tree/sysid-into-master-merge)
+[https://github.com/![your docker username]/Software/tree/sysid-into-master-merge](https://github.com/raabuchanan/Software/tree/sysid-into-master-merge)
 
 Note: Make sure you are on the `sysid-into-master-merge` branch.
 
-Then login in Docker with
+Make sure your DOCKER_HOST is set to nothing:
+```markduck
+laptop $ export DOCKER_HOST=
+```
+
+Then login in to your Dockerhub account with
 ```markduck
 laptop $ docker login
 ```
-Build your own image:
 
-Navigate to duckietown root on your computer, then
+
+## Make your own Docker Image
+
+Edit your controller in `~/Software/exercises/controls_exercise/controller.py`
+
+Navigate to duckietown root (~/Software) on your computer, then
 
 ```markduck
-laptop $ docker build -t /![docker username]/rpi-duckiebot-mycontroller:![any tag] .
+laptop $ docker build -t ![your docker username]/rpi-duckiebot-![your image name]:![your tag] .
 ```
 
-Push the image to your Docker Hub account:
+Don't forget the period at the end. Push the image to your Docker Hub account:
 ```markduck
-laptop $ docker push /![docker username]/rpi-duckiebot-mycontroller:![any tag]
+laptop $ docker push ![your docker username]/rpi-duckiebot-![your image name]:![your tag]
 ```
-
 
 
 ## How to launch your own controller
 
-*On your Duckiebot*
 First you will need to run the docker image created for this exercise.
 
 Note: Make sure your ros-picam and joystick containers are off.
 
 ```markduck
-laptop $ docker -H ![hostname].local run -it --net host --privileged -v /data:/data --name lane_follower_exercise raabuchanan/rpi-duckiebot-controls:master18 /bin/bash
+laptop $ docker -H ![hostname].local run -it --net host --privileged -v /data:/data --name lane_follower_exercise ![your docker username]/rpi-duckiebot-![your image name]:![your tag] /bin/bash
 ```
 Once this is running, launch the controller inside the container with:
 
 ```markduck
-laptop-container $ roslaunch duckietown_demos lane_following_exercise.launch /exercise/sampling_factor:=1.0 /exercise/time_delay:=0.0 /exercise/omega_sat=100
+laptop-container $ roslaunch duckietown_demos lane_following_exercise.launch /exercise/sampling_factor:=1.0 /exercise/time_delay:=0.0 /exercise/omega_sat:=100
 ```
 
-*On your laptop*
-Run the keyboard control, enter autonomous mode pressing <kbd>a</kbd>, stop it with <kbd>s</kbd>.
+***On your laptop***
+Run `dts keyboard_control`, enter autonomous mode pressing <kbd>a</kbd>, stop it with <kbd>s</kbd>.
 
 ## How to do small modifications
 
 First, ssh into the container with:
 ```markduck
-laptop $ docker exec -it ![container name] /bin/bash
+laptop $ docker exec -it lane_follower_exercise /bin/bash
 ```
 
 Then use a text editor to edit your file, i.e.
@@ -163,3 +170,6 @@ container $ vim ![your/path]/[your file]
 
 
 ## References
+
+
+This exercise is adapted from the [Lane Following Demo](http://docs.duckietown.org/DT18/opmanual_duckiebot/out/demo_lane_following.html) so look there if something in this exercise is unclear. Deliverables are TBD but most likely your controller.py
