@@ -1,13 +1,20 @@
 # Agenda for Exercise session
 
 1. AIDO submission
-  1. 1.Lane following task - description
-  1. 2.Agent template for aido1\_LF1
-  1. 3.Gym-duckietown - small demo (manual\_control.py, inputs and outputs)
+
+  1.1. Lane following task - description
+
+  1.2. Agent template for aido1\_LF1
+
+  1.3. Gym-duckietown - small demo (manual\_control.py, inputs and outputs)
+
 2. Planning exercise
-  2. 1.Install needed software and dependencies
-  2. 2.Pose representation and operations tutorial
-  2. 3.Dynamics tutorial
+
+  2.1.Install needed software and dependencies
+
+  2.2.Pose representation and operations tutorial
+  
+  2.3.Dynamics tutorial
 3. Questions
 
 ## AIDO submission
