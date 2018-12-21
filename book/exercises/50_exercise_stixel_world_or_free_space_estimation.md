@@ -18,6 +18,12 @@ Stixel representation is a middle ground between pixel and object level represen
 
 A stixel is a rectangular “stick” of a given width defined by its 3D orientation relative to the camera. Its height is defined by the bounding box of the object it represents. And free space is represented by the area between stixel agglomerations
 
+
+<div figure-id="fig:example1" figure-class="flow-subfigures">
+    <img figure-id="stixel obtaining flow" src='evolution.png'/>
+</div>
+
+
 ### Building the stixel world
 
 Stixel world construction starts with a stereo vision analysis to get a disparity map
@@ -45,6 +51,12 @@ If it does not deviate more than a maximal distance from the expected disparity 
 ### Cost Image 
 
 From the cost image we can extract the height of the obstacles. For each column, the height is where the cost is at its maximum
+
+
+<div figure-id="fig:example2" figure-class="flow-subfigures">
+    <img figure-id="Cost function" src='cost.png'/>
+</div>
+
 
 ### stixel extraction
 
