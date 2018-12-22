@@ -1,6 +1,6 @@
 # Exercise: Train an object detector {#exercise-object-detector status=draft}
 
-Assigned: Orlando Marquez and Jon Plante
+Assigned: Orlando Marquez and Jonathan Plante
 
 ## Skills learned
 
