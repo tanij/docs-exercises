@@ -13,7 +13,7 @@ Assigned: Orlando Marquez and Jon Plante
 
 YOLO is a real-time object detection system with a small footprint, if using tiny YOLO, which is a version of the YOLO architecture that has fewer convolutional layers. The size of the trained weights of tiny YOLO is less than 50 Mb.
 
- An object detection system can form the basis of a more complex pipeline, for instance, when doing SLAM. Below, we provide instructions on how to train tiny YOLO on 4 classes of objects:
+An object detection system can form the basis of a more complex pipeline, for instance, when doing SLAM. Below, we provide instructions on how to train tiny YOLO on 4 classes of objects:
 
 1. Duckiebots
 2. Duckies
@@ -30,7 +30,7 @@ Clone the Github repository forked from YOLO's repository:
 
 This repository contains the YOLO files, a dataset that we created and tools to train an object detection system.
 
-### Creating a dataset
+### Creating labels
 We include a small dataset of 420 images `data_4_classes.tar.gz` and provide tools to expand this dataset or create a new one with the classes of objects you want to detect.
 
 First, if you are using the Duckietown logs, you will see that many of the images are blurry. Some of them are too blurry for anything useful to be learned. The script `detect_blurry_img.py` uses a Laplacien filter to determine if an image is blurry.
@@ -72,7 +72,10 @@ After execution, you need to create two other files that will be required during
     laptop $ ls ![data_folder]/trainset/*.jpg > ![data_folder]/train.txt
     laptop $ ls ![data_folder]/validset/*.jpg > ![data_folder]/valid.txt
 
-### Training
+We provide a sample bash script that performs all the steps to prepare the data. It is called `prepdata`.
+
+
+### Prepare the YOLO config files
 Now that the datasets have been created, we need to create the YOLO configuration files. These are:
 
 * File containing the class names (`classname_file`)
@@ -100,7 +103,42 @@ stop_sign
 road_sign
 ```
 
+These are the 4 classes of objects we are training on. An example label file is `duckiestuff/trainset/100_000151.txt` with a corresponding image file `duckiestuff/trainset/100_000151.jpg`. Note that they have to be in the same directory. The label for this image is specified as follows:
+
+```
+2 0.4 0.22 0.02 0.1
+3 0.75 0.22 0.03 0.1
+1 0.99 0.44 0.03 0.07
+```
+
+Each line of this file refers to an object. There are 5 elements in the YOLO label, each separated by a space:
+
+1. Class ID (in the same order as in the file containing the class names). Class 0 is bot in our case, class 1 is duckie and so on
+2. x coordinate for the center of the object in the image
+3. y coordinate for the center of the object in the image
+4. object width (normalized by the width of the image)
+5. object height (normalized by the height of the image)
+
+Lastly, there is the `architecture_file`, which specifies the number of convolutional layers to use and has to match the number of classes we are trying to detect. We simply copy `cfg/yolov3-tiny.cfg` and make the following modifications:
+
+1. Change lines 127 and 171 to filters=27 as we have 4 classes. The formula is filters=(classes + 5)\*3
+2. Change lines 135 and 177 to classes=4 as we are training 4 classes
+
+### Training
+
+For the training steps, refer to the following [Google Colab](https://drive.google.com/open?id=17pV9CtC8MFi38z1gz8CqE0gD6DthDNMV), which you can copy and modify. This Colab starts by cloning the same repository as above.
 
 ### Testing
 
+Once we have trained weights, we can run inference on an image, as follows:
+
+    laptop $ /darknet detector test ![data_file] ![architecture_file] ![weights_file] ![input_image] -thresh ![threshold]
+
+The `weights_file` is the result of our training. The `threshold` parameter allows us to tell the predictor to only output bounding boxes when it is highly confident of its predictions, or we can relax this parameter. Here is an example of the bounding boxes predicted using a threshold of 0.7.
+
+<img style="width:30em" src="yolo_sample.jpg"/>
+
+We can also run inference on a video file, for example a video from the Duckietown logs. However, it needs to be run from a machine with a GPU; otherwise, the frame-per-second rate will be too low.
+
+    laptop $ ./darknet detector demo ![data_file] ![architecture_file] ![weights_file] ![input_video]
 
