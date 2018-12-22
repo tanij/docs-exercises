@@ -50,11 +50,14 @@ We also provide a script to label images:
 
     laptop $ python label_data.py
 
-You need to execute `pip install easygui` if you don't have `easygui` installed.
+You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes.
+TODO expand on this
 
 Finally, we include a script to verify the labels that were created:
 
-    laptop $ python 
+    laptop $ python
+
+TODO: expand on this 
 
 ### Preparing the dataset
 At this stage, you should have a directory called `data` with two sub-directories `frames` and `labels`. From there we want to create the directories that we will use to train YOLO. We provide a script named `create_datasets.py` which will create the required directories:
