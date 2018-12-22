@@ -1,6 +1,6 @@
 # Exercise: Train an object detector {#exercise-object-detector status=draft}
 
-Assigned: Orlando Marquez and Jonathan Plante
+Assigned: Orlando Marquez and Jon Plante
 
 ## Skills learned
 
@@ -30,7 +30,7 @@ Clone the Github repository forked from YOLO's repository:
 
 This repository contains the YOLO files, a dataset that we created and tools to train an object detection system.
 
-### Creating labels
+### Creating a dataset
 We include a small dataset of 420 images `data_4_classes.tar.gz` and provide tools to expand this dataset or create a new one with the classes of objects you want to detect.
 
 First, if you are using the Duckietown logs, you will see that many of the images are blurry. Some of them are too blurry for anything useful to be learned. The script `detect_blurry_img.py` uses a Laplacien filter to determine if an image is blurry.
@@ -39,25 +39,43 @@ First, if you are using the Duckietown logs, you will see that many of the image
 
 The arguments are:
 
-* `input_folder`: directory of all images you want to classify as blurry. We grab all files ending in `.jpg` or `.jpeg`
+* `input_folder`: directory of all images you want to classify as blurry. We grab all files ending with `.jpg` or `.jpeg`
 * `blurry_folder`: directory where blurry images will be copied to
 * `non_blurry_folder`: directory where non blurry images will be copied to
 * `threshold`: default is 200, the higher the threshold, the stricter the classifier is on blurry images
 
 After executing this script the directory `non_blurry_folder` will contain the non-blurry images that we can train on.
 
-We also provide a script to label images:
+We also provide a script to label images: `label_data.py`
+This scripts allows you to draw rectangles around an object in image and then label the class of that object. You can label multiple classes. Classes start at 1.
 
-    laptop $ python label_data.py
+You need to execute `pip install easygui` if you don't have `easygui` installed.
 
-You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes.
-TODO expand on this
+    laptop $ python label_data.py ![input_folder] ![output_folder]
 
-Finally, we include a script to verify the labels that were created:
+The arguments are :
 
-    laptop $ python
+* `input_folder`: directory of images that you want to label
+* `output_folder`: directory where labelled images will be moved to and where the corresponding label file will be saved
 
-TODO: expand on this 
+To quit the labelling tool, just press control+C in the command prompt.
+To finish labelling an image press control+C when on the picture, or enter 0 as the class of an object in the input box. This object will not be in the label file, and the program will go to next image. 
+Classes start at 1 in the input dialog box, but in the label file it starts at 0. The label file is a txt file in YOLO format with the same name as the image file.
+
+
+Finally, we include a script to verify the labels that were created. It is found in the directory `Labelling/CheckAnnotation`.
+You need to run the script `main.py`.
+
+    laptop $ python main.py ![input_image] ![input_label]
+
+
+The arguments are:
+
+input_image = image that will be checked
+input_label= file that contains labels in yolo format (.txt)
+
+This script will take the image and draw the labels on it. Classes with different labels will have different colors. 
+
 
 ### Preparing the dataset
 At this stage, you should have a directory called `data` with two sub-directories `frames` and `labels`. From there we want to create the directories that we will use to train YOLO. We provide a script named `create_datasets.py` which will create the required directories:
