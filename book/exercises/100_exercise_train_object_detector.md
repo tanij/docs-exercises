@@ -71,8 +71,8 @@ You need to run the script `main.py`.
 
 The arguments are:
 
-input_image = image that will be checked
-input_label= file that contains labels in yolo format (.txt)
+* `input_image` : image that will be checked
+* `input_label` : file that contains labels in yolo format (.txt)
 
 This script will take the image and draw the labels on it. Classes with different labels will have different colors. 
 
