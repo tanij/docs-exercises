@@ -14,5 +14,36 @@ Result: Data for Visual Odometry training/testing
 </div>
 
 ## Data collection
+  * Run camera_node on your duckiebot
+
+    To write
+
+  * Making your Duckiebot move
+
+    To write
+
+  *  Publishing Vicon data
+
+    To write
+
+  * Record data
+
+    To write
+
+
+  An example
+
 ## Decoder and synchronization
+  * Decode image
+
+  * Synchornization
+
+  * Record new data
+
+
+
+
 ## Data export
+  * Create images from bag file
+
+  * Create txt file from bag
