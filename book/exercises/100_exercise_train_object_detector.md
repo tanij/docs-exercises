@@ -1,4 +1,4 @@
-# Exercise: Train an Object Detector {#exercise-object-detector status=draft}
+# Exercise: Train an object detector {#exercise-object-detector status=draft}
 
 Assigned: Orlando Marquez and Jon Plante
 
@@ -39,7 +39,7 @@ First, if you are using the Duckietown logs, you will see that many of the image
 
 The arguments are:
 
-* `input_folder`: directory of all images you want to classify as blurry. We grab all files ending with `.jpg` or `.jpeg`
+* `input_folder`: directory of all images you want to classify as blurry. We grab all files ending in `.jpg` or `.jpeg`
 * `blurry_folder`: directory where blurry images will be copied to
 * `non_blurry_folder`: directory where non blurry images will be copied to
 * `threshold`: default is 200, the higher the threshold, the stricter the classifier is on blurry images
@@ -86,7 +86,7 @@ To start the training, we need to call:
 
     laptop $ ./darknet detector train ![data_file] ![architecture_file] ![pretrained_weights]
 
-The `data_file` is important as this specifies the data to use while training. It looks like:
+The `data_file` is important as this specifies the data to use while training. It has the following lines:
 
 ```
 train  = duckiestuff/train.txt
@@ -134,7 +134,7 @@ Once we have trained weights, we can run inference on an image, as follows:
 
     laptop $ /darknet detector test ![data_file] ![architecture_file] ![weights_file] ![input_image] -thresh ![threshold]
 
-The `weights_file` is the result of our training. The `threshold` parameter allows us to tell the predictor to only output bounding boxes when it is highly confident of its predictions, or we can relax this parameter. Here is an example of the bounding boxes predicted using a threshold of 0.7.
+The `weights_file` is the result of our training. The `threshold` parameter allows us to tell the predictor to only output bounding boxes when it is highly confident of its predictions. Here is an example of the bounding boxes predicted using a threshold of 0.7.
 
 <img style="width:30em" src="yolo_sample.jpg"/>
 
