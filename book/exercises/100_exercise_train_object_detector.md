@@ -46,31 +46,31 @@ The arguments are:
 
 After executing this script the directory `non_blurry_folder` will contain the non-blurry images that we can train on.
 
-We also provide a script to label images: `label_data.py`. This scripts allows you to draw rectangles around an object in image and then label the class of that object. You can label multiple classes.
+We also provide a script to label images: `label_data.py`. 
 
     laptop $ python label_data.py ![input_folder] ![output_folder]
 
-You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes. 
+You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes but it can be easily expanded. 
 The arguments are:
 
 * `input_folder`: directory of images that you want to label
 * `output_folder`: directory where labelled images will be moved to and where the corresponding label file will be saved
 
-This script will show you all files with extension `jpg` or `jpeg`. For each image, you can draw a rectangle around the object you want to label. To finish labelling an image press control+c when on the picture, or enter 0 as the class of an object. This object will not be in the label file, and the program will go to next image. Classes start at 1 in the input dialog box, but in the label file it starts at 1. The label file is a txt file in YOLO format with the same name as the image file. To quit, just press control+c in the command prompt.
+This script will show you all files with extension `jpg` or `jpeg`. For each image, you can draw a rectangle around the object you want to label. To finish labelling an image press control+c when on the picture, or enter 0 as the class of an object. This object will not be in the label file, and the program will go to the next image. Classes start at 1 in the input dialog box but in the label file it starts at 0. The label file is a txt file in YOLO format with the same name as the image file. To quit, just press control+c in the command prompt.
 
-Finally, we provide a script to ensure that the labels work as expected: `check_annotation.py`:
+Finally, we provide a script to ensure that the labels work as expected: `check_annotation.py`.
 
     laptop $ python check_annotation.py ![image_path] ![label_path]
 
 The arguments are:
 
 * `image_path`: image that will be checked
-* `label_path`: file that has labels in it
+* `label_path`: file that contains labels
 
 This script will show the image and the bounding boxes represented by the labels found in `label_path`. Classes with  different labels will have different colors. Press any key to close the window showing the image.
 
 ### Preparing the dataset
-At this stage, you should have a directory called `data` with two sub-directories `frames` and `labels`. From there we want to create the directories that we will use to train YOLO. We provide a script named `create_datasets.py` which will create the required directories:
+To proceed, you need to have a directory with two sub-directories `frames` and `labels`, the first containing the images and the other containing the corresponding labels. From there we want to create directories that we will use to train YOLO. We provide a script named `create_datasets.py` that creates the required directories:
 
     laptop $ python create_datasets.py ![raw_data_folder] ![data_folder] ![percentage_training]
 
@@ -99,7 +99,7 @@ To start the training, we need to call:
 
     laptop $ ./darknet detector train ![data_file] ![architecture_file] ![pretrained_weights]
 
-The `data_file` is important as this specifies the data to use while training. It has the following lines:
+The `data_file` is important as this specifies the data to use while training. Our file in the above repository has the following lines and it follows the YOLO convention:
 
 ```
 train  = duckiestuff/train.txt
@@ -108,7 +108,7 @@ names = data/duckie-multi.names
 backup = duckie_backup
 ```
 
-You can look at the repository to get an idea of what files `train.txt` and `valid.txt` look like: lists of image paths. The file referenced by `names` is the `classname_file`, which in our case looks like the following since we are training on 4 classes:
+You can look at the repository to get an idea of what the files `train.txt` and `valid.txt` look like: lists of image paths. The file referenced by `names` is the `classname_file`, which in our case looks like the following since we are training on 4 classes:
 ```
 bot
 duckie
@@ -124,13 +124,13 @@ These are the 4 classes of objects we are training on. An example label file is 
 1 0.99 0.44 0.03 0.07
 ```
 
-Each line of this file refers to an object. There are 5 elements in the YOLO label, each separated by a space:
+Each line of this file refers to an object. There are 5 elements in the YOLO label, each separated by a space. Note that all values are normalized by the image width and height to be between 0 and 1.0.
 
 1. Class ID (in the same order as in the file containing the class names). Class 0 is bot in our case, class 1 is duckie and so on
 2. x coordinate for the center of the object in the image
 3. y coordinate for the center of the object in the image
-4. object width (normalized by the width of the image)
-5. object height (normalized by the height of the image)
+4. object width
+5. object height
 
 Lastly, there is the `architecture_file`, which specifies the number of convolutional layers to use and has to match the number of classes we are trying to detect. We simply copy `cfg/yolov3-tiny.cfg` and make the following modifications:
 
