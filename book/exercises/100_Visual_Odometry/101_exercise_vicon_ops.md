@@ -4,7 +4,7 @@
 
 Requires: Vicon motion capture system including [Vicon Bonita](https://www.Vicon.com/products/archived-products/bonita "Vicon Bonita") infrared cameras, [Vicon Active Wand](https://www.Vicon.com/products/Vicon-devices/calibration "Vicon Active Wand") \(T-shaped\), Vicon software installed on a Vicon server and Wifi network.
 
-Result: publish Vicon data (ground truth) of an object to the ROS network.
+Result: you can publish Vicon data (ground truth) of an object to the ROS network.
 
 </div>
 
@@ -93,7 +93,7 @@ To write
 ### Check the Vicon Data
 To write
 
-## Vicon and ROS
+## Vicon and ROS {#ros-setup status=ready}  
 ### Install ROS interface and dependencies
 To write
 
