@@ -48,16 +48,27 @@ After executing this script the directory `non_blurry_folder` will contain the n
 
 We also provide a script to label images:
 
-    laptop $ python label_data.py
+    laptop $ python label_data.py ![input_folder] ![output_folder]
 
-You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes.
-TODO expand on this
+You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes. 
+The arguments are:
+
+* `input_folder`: directory of images that you want to label
+* `output_folder`: directory where labelled images will be moved to and where the corresponding label file will be saved
+
+This script will show you all files with extension `jpg` or `jpeg`. For each image, you can draw a rectangle around the object you want to label. To finish labelling an image press control+c when on the picture, or enter 0 as the class of an object. This object will not be in the label file, and the program will go to next image. Classes start at 1 in the input dialog box, but in the label file it starts at 1. The label file is a txt file in YOLO format with the same name as the image file. To quit, just press control+c in the command prompt.
+
 
 Finally, we include a script to verify the labels that were created:
 
-    laptop $ python
+    laptop $ python check_annotation.py ![image_path] ![label_path]
 
-TODO: expand on this 
+The arguments are:
+
+* `image_path`: image that will be checked
+* `label_path`: file that has labels in it
+
+This script will show the image and the bounding boxes represented by the labels found in `label_path`. Classes with  different labels will have different colors. Press any key to close the window showing the image.
 
 ### Preparing the dataset
 At this stage, you should have a directory called `data` with two sub-directories `frames` and `labels`. From there we want to create the directories that we will use to train YOLO. We provide a script named `create_datasets.py` which will create the required directories:
