@@ -80,18 +80,17 @@ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavform
 Next, create any directory for it to contain your opencv installation, cd into it and grab the source code:
 
 ```
-cd /path/to/opencv/install/location
-git clone https://github.com/opencv/opencv.git
-git clone https://github.com/opencv/opencv_contrib.git
+cd /path/to/desired/opencv/install/location
+git clone --branch 3.4 https://github.com/opencv/opencv.git
 ```
 
-Then create a build directory and configure (don't forget to replace the path in the cmake command to the folder you downloaded the source code):
+Then create a build directory and configure (don't forget to replace the path in the cmake command to the folder you downloaded the source code in):
 
 ```
 cd ~/opencv
 mkdir build
 cd build
-cmake -DOpenCV_DIR="/path/to/opencv/install/location/opencv/build" ../
+cmake -DOpenCV_DIR="/path/to/desired/opencv/install/location/opencv/build" ../
 make -j7
 ```
 
@@ -101,8 +100,12 @@ Here's the link to download some sample data (stereo images) and the stixel-worl
 
 ### Run the live demo
 
-First uncompress the downloaded tarball to your preferred location and cd into it. To start the live demo:
+Uncompress the downloaded tarball to your preferred location and cd into it. To start the live demo:
 
 ```
 ./stixelworld goodWeather/2010-05-03_080828/images/img_c0_%09d.pgm goodWeather/2010-05-03_080828/images/img_c1_%09d.pgm ../camera.xml
 ```
+
+Here's an example of what you should see:
+
+![stixel-world example](stixel-world-demo.gif)
