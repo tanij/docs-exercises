@@ -45,7 +45,7 @@ Creating a good model of dynamic obstacles is much, much harder than it sounds. 
 *We don't always know who's coming down the road, but sometimes it's this maniac in a lambo*
 <br>
 
- To approach this problem we create an entirely deterministic situation in our simulator, add some stochastic behaviour to an oncoming duckiebot, create a probability distribution over their position, and use that distribution to inform our motion plan.
+ To approach this problem we created an entirely deterministic situation in our simulator, added some stochastic behaviour to an oncoming duckiebot, created a probability distribution over their velocity, and use that distribution to inform our motion plan.
 
 
 
@@ -56,7 +56,19 @@ To support this exercise, we designed a very simple 2-D (overhead view) simulato
 
 Similar to the setup in Duckietown, we have a small positive reward for staying in our lane, a small negative reward for crossing into the opposite lane, and larger negative rewards for leaving the road entirely or colliding with the other duckiebot.
 
-Our solution builds a 4-dimensional tensor with two dimensions representing regions on our 2-dimensional map, a 3rd dimension represents time, and a fourth is the expected reward from being in that region at that time. We use the variant of Rapidly-exploring Random Trees (RRT) built on Dubin's curve, with Monte Carlo Tree Search (MCTS) to approximate our optimal trajectory up to a given time horizon.
+### Problem we want to solve:
+
+Imagine you are driving on a straight road, in your lane, when you suddenly see in front of you a big truck driving on the middle of the road. It is so big, that you have no choice but to avoid it by partially going out of the road. The thing is, you know that the guy driving is a bit sleepy: he does not touch the wheel, but he plays with the accelerator and the break pedal randomly. How do you plan your trajectory to avoid collision while minimizing your driving partially out of the road?
+This problem gives us two possible cases: when the truck is coming towards us, or when it is going in the same direction than us. The solution should be able to perform well in these two cases.
+
+### Our solution:
+
+Our solution predicts the probability of the other duckiebot's position in time, using the velocity probabilistic model to propagate its possible positions over a one-dimensional discretized map. It is then able to compute the probability of collision for our Duckiebot at any position and time. This is used by a Monte Carlo Tree Search algorithm in order to compute a probable reward at each node, and to approximate our optimal trajectory up to a given time horizon.
+
+### The exercise:
+
+Can you do better than us? In `include/dt_agent`, the file `agent.py` is instantiating a predictor and a planner. Add your own predictor and planner in the same folder, and don't forget to include them in the `include/dt_agent/__init.py__`. Compare with our version by measuring your score at t = 25 sec.
+But first, you'll have to install the whole thing. The following sections explains you how to, and then, how does the whole package work.
 
 
 ## Installation
@@ -142,6 +154,14 @@ For visualization purposes, the node also publishes this topic:
 #### Service
 The ```get_ground_type``` service can be called to return the ground type on which a robot with a given position and radius would be.
 
+#### How is our Duckiebot movement encoded?
+
+When the `orientation_seq` message arrives, it contains a sequence of orientations in radians. We consider that our Duckiebot has a constant speed and cannot accelerate nor break. Therefore, at each time step, it will follow the orientation given by `orientation_seq`. 
+Note that the Duckiebot cannot turn extremely fast. Therefore, we limit its orientation change at every time step: if the difference between the orientation command and the current orientation is bigger than the limit, the orientation change is set to the limit.
+
+#### How is the other Duckiebot movement working?
+
+The other Duckiebot is going straight forward. Remember: it is a truck and the sleepy driver does not touch the wheel. However, the driver plays with the accelerator and the breaks. We model this by drawing, at every time step, an acceleration from an uniform distribution. The truck is not unlimited though: it has a minimum and a maximal velocity, from which it cannot respectively break or accelerate anymore.
 
 
 ## Manager Node
@@ -189,10 +209,12 @@ Once the Agent receives this message, it computes the best trajectory, simulates
     * `orientation_seq`: trajectory to be executed in the meantime (only orientation, in radians).
 
 ### Computation of the trajectory
-The computation of the best trajectory is done in two parts:
+In our case, the computation of the best trajectory is done in two parts:
 
-1. Using the observations and a known movement model of the other Duckiebot, the Agent predicts the probability of collision at each time step for any x, y position of our Duckiebot.
-2. Using Monte Carlo Tree Search with orientation change as the unique parameter, the agent finds the path with the highest reward (or lowest negative reward)
+1. Using the observations and a known movement model of the other Duckiebot, the Agent predicts the probability of collision at each time step for any x, y position of our Duckiebot. This is done in two steps:
+  a. Given the position, heading and velocity of the other Duckiebot, the Predictor uses its probabilistic velocity model to approximate the probability of the other Duckiebot's position (in the *y* axis only) at every time step until a given horizon. This is saved on a discretized map.
+  b. Then, given a x, y position for a time step, the Predictor checks every *y* point on the discretized map that would lead into a collision, and add the probabilities of the other Duckiebot to be there to give the probability of collision.
+2. Using Monte Carlo Tree Search with orientation change as the unique parameter, the agent finds the path with the highest reward (or lowest negative reward).
 
 
 ## Seeing what is happening
@@ -238,6 +260,10 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
   * `computation_time` :
     * `mean` : average number of time steps taken to simulate the computation time
     * `std_dev` : standard deviation in time steps of the simulated computation time
+  * `mcts` :
+    * `scalar` : raise this number to increase the exploration behavior, lower the number to increase the exploitation behavior of the MCTS
+    * `budget` : TODO
+    * `time_steps` : amount of time steps the MCTS is looking ahead
 
 ## Drive Safe
 
