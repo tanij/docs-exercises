@@ -138,14 +138,13 @@ Example of text files can be found  [here](https://drive.google.com/drive/folder
 
 ## Modified heading angle
 ### Quaternion to Euler angles problem
-The `atan2` function is used to calculate the Duckiebot heading angle from the quaternion given by Vicon. Therefore, the range of this angle is $[-\pi,\pi]$. This constraint can cause a data jump from $\pi$ to $-\pi$ as shown in [](#fig:angle).
+The `atan2` function is used to calculate the Duckiebot heading angle from the quaternion given by Vicon. Therefore, the range of this angle is $[-\pi,\pi]$. This constraint can cause a data jump from $\pi$ to $-\pi$ as shown in [](#fig:angle) of the test case [alex_3small_loops](https://drive.google.com/drive/folders/19HOO3IqiI70Ay0XJ7LQXO7wie6DOsFcS).
 
 <div figure-id="fig:angle">
-<img src="images/alex_3small_loops.jpg" style="width: 80%"/>
-<figcaption>Duckiebot test case</figcaption>
+<img src="images/alex_3small_loops.jpg" style="width: 90%"/>
+<figcaption>Modified heading angle</figcaption>
 </div>
 
-![drawing](images/alex_3small_loops.jpg)
 
 ### Modified yaw angle
 When there is a data jump, the heading angle is modified by adding $\pm\pi$. The modified angle is now continuous ([](#fig:angle)) and compatible for the training process.
