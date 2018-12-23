@@ -70,7 +70,14 @@ With the free space and the height of the obstacles, we can finally create the s
 
 #### Opencv installation on ubuntu
 
-First, create any directory for it to contain your opencv installation, cd into it and grab the source code:
+First, make sure you have some dependencies for opencv itself:
+
+```
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+```
+
+Next, create any directory for it to contain your opencv installation, cd into it and grab the source code:
 
 ```
 cd /path/to/opencv/install/location
