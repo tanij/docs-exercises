@@ -14,10 +14,7 @@ You can run all of this over your favourite log!
 
 ## Instructions
 
-During the course we've seen different SLAM techniques here we're doing a lane-base SLAM using semantics as  
-
-However, we already gave you a copy of `image-ops-tester`, which you
-used in the previous step, so there is not much of a challenge. So, let's go one level up, and consider...
+During the course we've seen different SLAM techniques here we're doing a lane-base SLAM using semantics as a prior knowledge.
 
 
 ## Image of expected results
