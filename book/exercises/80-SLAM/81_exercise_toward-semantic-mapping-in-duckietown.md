@@ -1,5 +1,5 @@
 
-# Exercise: Towards Semantic Mapping in Duckietown (optional) {#semantin-mappping status=draft}
+# Exercise: Towards Semantic Mapping in Duckietown {#semantin-mappping status=draft}
 
 ## Skills learned
 
@@ -14,41 +14,42 @@ You can run all of this over your favourite log!
 
 ## Instructions
 
-A good exercise is writing `image-ops-tester` yourself.
+During the course we've seen different SLAM techniques here we're doing a lane-base SLAM using semantics as  
 
 However, we already gave you a copy of `image-ops-tester`, which you
 used in the previous step, so there is not much of a challenge. So, let's go one level up, and consider...
 
-## `image-ops-tester-tester` specification
 
-Write a program `image-ops-tester-tester` that tests whether
-a program conforms to the specification of a `image-ops-tester`
-given in [](#image-ops-tester-specification).
+## Image of expected results
+<figure>
+    <figcaption>Examples of expected visualization: </figcaption>
+	<figure>
+	    <figcaption>Map 1.</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map1.png"/>
+	</figure>
+	<figure>
+	    <figcaption>Map 2.</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map2.png"/>
+	</figure>
+</figure>
+## Demo Code
 
-The `image-ops-tester-tester` program is called as follows:
+The main Lane-SLAM repository is <a src="https://github.com/mandanasmi/lane-slam">here</a>. Clone the repo to visualize the lane-based semantic map that is used in the duckietown. We're detecting different types of lines in images (white, yellow and red) using LSD and then use discriptors to match lines and localize their position in an image. Then we do a wheel odometery to build the map.  
 
-    $ image-ops-tester-tester ![candidate-image-ops-tester]
+## Required packages
 
-This must return:
+* Linux-based machines 
 
-- 0 if the candidate conforms to the specification;
-- 1 if it doesn't;
-- another error code if other errors arise.
+* OSx
 
-## Testing it works with `image-ops-tester-tester-tester`
+* Windows
 
-We provide you with a helpful program called `image-ops-tester-tester-tester`
-that makes sure that a candidate script conforms to the specification of
-an `image-ops-tester-tester`.
 
-Use it as follows:
 
-    $ image-ops-tester-tester-tester ![candidate image-ops-tester-tester]
+## Reproduce results 
 
-This should return 0 if everything is ok, or different than 0 otherwise.
 
-## Bottom line {nonumber=1}
+## Set up the visualization
 
-Even if things are tested, you can never be sure that the tests themselves work.
 
 <!-- TODO: Validation and testing -->
