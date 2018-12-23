@@ -40,13 +40,10 @@ Egocentric Vision-Based  Future Vehicle Localization for Intelligent Driving Ass
 
 Creating a good model of dynamic obstacles is much, much harder than it sounds. Humans mess this up all the time. Take, for example, the situation presented in the image above. You're trying to turn left, you have a green light, and no one is currently in your way. We see that the path-planning module, using its estimates of the oncoming vehicles position at previous timesteps, is predicting that the silver oncoming Mercedes is going to get in our way. But what if that driver is some kind of maniac and swerves in front of you? It happens. There's an enormous amount of unavailable information that must be modeled as uncertainty.
 
-<br>
-<br>
-<br>
 ![](images/lambo.gif)
 <br>
 *We don't always know who's coming down the road, but sometimes it's this maniac in a lambo*
-<br><br>
+<br>
 
  To approach this problem we create an entirely deterministic situation in our simulator, add some stochastic behaviour to an oncoming duckiebot, create a probability distribution over their position, and use that distribution to inform our motion plan.
 
