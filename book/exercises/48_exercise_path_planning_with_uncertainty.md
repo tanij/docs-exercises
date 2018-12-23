@@ -262,7 +262,7 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
     * `std_dev` : standard deviation in time steps of the simulated computation time
   * `mcts` :
     * `scalar` : raise this number to increase the exploration behavior, lower the number to increase the exploitation behavior of the MCTS
-    * `budget` : TODO
+    * `budget` : Iterations of the MCTS through the tree. In each iteration, a new node is added so the tree is expanded.
     * `time_steps` : amount of time steps the MCTS is looking ahead
 
 ## Drive Safe
