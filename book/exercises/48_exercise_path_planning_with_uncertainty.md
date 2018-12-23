@@ -270,3 +270,4 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
 ## Drive Safe
 
 ![](images/cool_duck.gif)
+![](images/duckswap.jpg)
