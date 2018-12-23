@@ -24,6 +24,7 @@ We are going to focus on a significantly more difficult problem in this tutorial
 
 <center>
 ![I'm not sure what's happening here](images/duckswap.jpg)
+ 
 <br>
 *I'm not sure what's happening here*
 </center>
@@ -46,7 +47,7 @@ Creating a good model of dynamic obstacles is much, much harder than it sounds. 
 <center>
 <br>
 <br>
-![lambo flipping over gif](images/lambo.gif)
+![](images/lambo.gif)
 <br>
 *We don't always know who's coming down the road, but sometimes it's this maniac in a lambo*
 <br><br>
@@ -247,23 +248,23 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
     * `std_dev` : standard deviation in time steps of the simulated computation time
 
 
-## Instructions
+%## Instructions
 
-Create a ROS node and package that takes as input the list of line segments detected by the line detector, and outputs an estimate of the robot position within the lane to be used by the lane controller. You should be able to run:
+%Create a ROS node and package that takes as input the list of line segments detected by the line detector, and outputs an %estimate of the robot position within the lane to be used by the lane controller. You should be able to run:
 
-    duckiebot $ source ![DUCKIETOWN_ROOT]/environment.sh
-    duckiebot $ source ![DUCKIETOWN_ROOT]/set_vehicle.name.sh
-    duckiebot $ roslaunch dt_filtering_![ROBOT_NAME] lane_following.launch
+%    duckiebot $ source ![DUCKIETOWN_ROOT]/environment.sh
+%    duckiebot $ source ![DUCKIETOWN_ROOT]/set_vehicle.name.sh
+%    duckiebot $ roslaunch dt_filtering_![ROBOT_NAME] lane_following.launch
 
-and then follow the instructions in [](+fall2017_info#checkoff_navigation) for trying the lane following demo.
+%and then follow the instructions in [](+fall2017_info#checkoff_navigation) for trying the lane following demo.
 
-You should definitely look at the existing histogram filter for inspiration.
+%You should definitely look at the existing histogram filter for inspiration.
 
-You may find [this](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/11-Extended-Kalman-Filters.ipynb) a useful resource to get started.
+%You may find [this](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/11-Extended-Kalman-%Filters.ipynb) a useful resource to get started.
 
-### Workflow Tip
+%### Workflow Tip
 
-While you are working on your node and it is crashing, you need not kill and relaunch the entire stack (or even launch on your robot). You should build a workflow whereby you can quickly launch only the node you are developing from your laptop.
+%While you are working on your node and it is crashing, you need not kill and relaunch the entire stack (or even launch on your robot). You should build a workflow whereby you can quickly launch only the node you are developing from your laptop.
 
 
 ## Drive Safe
