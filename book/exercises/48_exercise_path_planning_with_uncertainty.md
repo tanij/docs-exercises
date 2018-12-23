@@ -239,7 +239,7 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
     * `mean` : average number of time steps taken to simulate the computation time
     * `std_dev` : standard deviation in time steps of the simulated computation time
 
-
+<--
 %## Instructions
 
 %Create a ROS node and package that takes as input the list of line segments detected by the line detector, and outputs an %estimate of the robot position within the lane to be used by the lane controller. You should be able to run:
@@ -258,7 +258,7 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
 
 %While you are working on your node and it is crashing, you need not kill and relaunch the entire stack (or even launch on your robot). You should build a workflow whereby you can quickly launch only the node you are developing from your laptop.
 
-
+-->
 ## Drive Safe
 
 ![](images/cool_duck.gif)
