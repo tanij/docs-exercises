@@ -64,5 +64,38 @@ From the cost image we can extract the height of the obstacles. For each column,
 
 With the free space and the height of the obstacles, we can finally create the stixels
 
-## Getting a Stixel Representation based on a stereo image
+## Running a live Stixel Representation demo based on stereo images
 
+### Install dependencies
+
+#### Opencv installation on ubuntu
+
+First, create any directory for it to contain your opencv installation, cd into it and grab the source code:
+
+```
+cd /path/to/opencv/install/location
+git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv_contrib.git
+```
+
+Then create a build directory and configure (don't forget to replace the path in the cmake command to the folder you downloaded the source code):
+
+```
+cd ~/opencv
+mkdir build
+cd build
+cmake -DOpenCV_DIR="/path/to/opencv/install/location/opencv/build" ../
+make -j7
+```
+
+### Download required code and data to run an example
+
+Here's the link to download some sample data (stereo images) and the stixel-world demo : [link](https://drive.google.com/open?id=1Qmjo0ie79VV4dZ23e99a3eo7q_dGQRHe)
+
+### Run the live demo
+
+First uncompress the downloaded tarball to your preferred location and cd into it. To start the live demo:
+
+```
+./stixelworld goodWeather/2010-05-03_080828/images/img_c0_%09d.pgm goodWeather/2010-05-03_080828/images/img_c1_%09d.pgm ../camera.xml
+```
