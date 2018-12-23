@@ -16,6 +16,17 @@ You can run all of this over your favourite log!
 
 During the course we've seen different SLAM techniques here we're doing a lane-base SLAM using semantics as a prior knowledge.
 
+### Semantic association to the road
+To explain how we associate semantic to the lines
+
+### Line Detection 
+Explain using LSD 
+
+### Wheel Odometry
+How we build the map using wheel odometry 
+
+### Line Filetring
+Explain how we filter spurious lines and make smooth odometry estimates
 
 ## Image of expected results
 <figure>
