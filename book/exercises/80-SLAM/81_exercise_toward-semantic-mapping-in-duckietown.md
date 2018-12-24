@@ -12,7 +12,23 @@
 
 You can run all of this over your favourite log!
 
+## Expected results
+<figure>
+    <figcaption>Examples of expected visualization: </figcaption>
+	<figure>
+	    <figcaption>Map 1.</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map1.png"/>
+	</figure>
+	<figure>
+	    <figcaption>Map 2.</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map2.png"/>
+	</figure>
+</figure>
+## Demo Code
+
+
 ## Instructions
+The main Lane-SLAM repository is <a src="https://github.com/mandanasmi/lane-slam">here</a>. Clone the repo to visualize the lane-based semantic map that is used in the duckietown. We're detecting different types of lines in images (white, yellow and red) using LSD and then use discriptors to match lines and localize their position in an image. Then we do a wheel odometery to build the map.  
 
 During the course we've seen different SLAM techniques here we're doing a lane-base SLAM using semantics as a prior knowledge. For that, we defined several nodes and packages that we described below: 
 
@@ -34,38 +50,24 @@ To run this node using `rosrun`, execute the following command.
 
 This package uses _OpenCV_ functions to compute binary descriptors for a bunch of line segments, to help in matching/associating lines. Currently, this functionality is in beta, but people are welcome to play around with the code in here.
 
-
-
 ### Line Associator
 
 
 
 ### Line Sanity
 
+In this package, we filter spurious lines and make odometry estimates smooth as well as remove the error of line detector which can cause of having lines which are too short or too long.
 
 
 ### Odometry
 
+
 ### Show Map
-Explain how we filter spurious lines and make smooth odometry estimates
+
 
 ### All in one
 
-## Image of expected results
-<figure>
-    <figcaption>Examples of expected visualization: </figcaption>
-	<figure>
-	    <figcaption>Map 1.</figcaption>
-	    <img style='width:20em; height:15em' src="figures/map1.png"/>
-	</figure>
-	<figure>
-	    <figcaption>Map 2.</figcaption>
-	    <img style='width:20em; height:15em' src="figures/map2.png"/>
-	</figure>
-</figure>
-## Demo Code
 
-The main Lane-SLAM repository is <a src="https://github.com/mandanasmi/lane-slam">here</a>. Clone the repo to visualize the lane-based semantic map that is used in the duckietown. We're detecting different types of lines in images (white, yellow and red) using LSD and then use discriptors to match lines and localize their position in an image. Then we do a wheel odometery to build the map.  
 
 ## Required packages
 
@@ -74,9 +76,6 @@ The main Lane-SLAM repository is <a src="https://github.com/mandanasmi/lane-slam
 * OSx
 
 * Windows
-
-### Semantic association to the road
-To explain how we associate semantic to the lines
 
 
 ## Reproduce results 
