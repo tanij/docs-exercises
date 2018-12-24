@@ -41,6 +41,18 @@ You'll also need a Linux computer with ROS.
 
 The main Lane-SLAM repository is [here](https://github.com/mandanasmi/lane-slam). Clone the repo and you'll have the ROS workspace containing all packages required. You can build that workspace and source before trying to run anything.
 
+
+### Shortcut to run the whole thing quickly and easily
+If you want to see the actual output of our solution quickly, we provide a launch file which runs every necessary node.
+To directly visualize the map you can run the following, replacing the `duckiebot_name` by the one in your log :
+```
+roslaunch show_map show_map_complete.launch veh:=duckiebot_name
+```
+
+You can now play your log and you should see the map being build.
+
+Now to see how we got there you curious duck, read the following sections! You can actually modify or replace every module, and run them individually to obtain the map construction.
+
 ### Overview of the modules
 Many different modules are used to build the lane map we plan to obtain. Here is a list of which modules we have and how they are combined:
 
@@ -109,7 +121,7 @@ To ensure this node works, you need to set up the following topics in `lane-slam
 4. All lines that do not satisfy a certain angular threshold.  
 
 ### Odometry (`lane_slam/src/odometry`)
-*Explanation*:  
+*Explanation:*  
 
 The odometry module's goal is to produce an estimate of the duckiebot's position.
 We provide a package which does so based on the `wheels_cmd`, but you can easily replace our package by your one which produces position estimations.
@@ -123,7 +135,7 @@ We subscribe to the `/duckiebot_name/wheels_driver_node/wheels_cmd_executed` top
 We run the kinematics and then publish the estimated position as a [tf](http://wiki.ros.org/tf) frame relation between the `/duck` frame, and the global frame `/map`.
 
 
-*Run it*:  
+*Run it:*
 You can run the odometry node and our visualization using the following command, replacing `duckiename` by the name of the duckiebot associated to your logs:
 ```
 roslaunch odometry odometry odometry.launch veh:=$duckiename
@@ -135,6 +147,18 @@ rosrun tf tf_echo map duck
 ```
 
 
-### Show Map
+### Show Map (`lane_slam/src/show_map`)
+*Explanation:*  
+The show_map module takes position information and detected, projected and filtered lines and uses [`rviz`](http://wiki.ros.org/rviz) to produce a visualization of the lanes map.
 
-### Running everything at once
+The current position of the robot is used through the `tf` frame `/duck`, and the lines are obtained from the `/duckiebot_name/line_sanity_node/filtered_segments_lsd` topic.
+
+The lines arrive as a [`SegmentList`](https://github.com/duckietown/Software/blob/master18/catkin_ws/src/00-infrastructure/duckietown_msgs/msg/SegmentList.msg) and are published through a `rviz` [`Marker`](http://wiki.ros.org/rviz/DisplayTypes/Marker) producing a `LINE_STRIP`, published in the `/duck` frame.
+
+*Run it:*  
+You can run the show_map node using our launch file, which also runs rviz with the right configuration. You must change the `duckiebot_name` to the one you have in your logs.
+```
+roslaunch show_map show_map_node.launch veh:=duckiebot_name
+```
+
+With the log and other previous nodes running, you should see the map being built.
