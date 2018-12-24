@@ -223,6 +223,21 @@ In our case, the computation of the best trajectory is done in two parts:
   b. Then, given a x, y position for a time step, the Predictor checks every *y* point on the discretized map that would lead into a collision, and add the probabilities of the other Duckiebot to be there to give the probability of collision.
 2. Using Monte Carlo Tree Search with orientation change as the unique parameter, the agent finds the path with the highest reward (or lowest negative reward).
 
+## Timing
+
+You will have noticed that the nodes do not run in real time. Instead, it is a simple loop.
+
+### How does it work?
+1. To kickstart the process, the Agent sends an empty command with *k = 1* computation time step.
+2. The Simulator sends the observations to the Agent and then propagates the world for *k = 1* time step with an empty command (our Duckiebot does not move).
+3. The Agent receives the observations. It computes the next trajectory and sends it with a random computation time step number *k*.
+4. The Simulator receives the trajectory and *k*. It sends the observations to the Agent and then propagates the world for *k* time steps with the given trajectory.
+5. The Agent receives the observations. Repeat stage 3, then 4, until program is stopped using Ctrl+C
+
+At every time step, the Simulator also publishes the ground truth state so that the Manager can record the trajectory and count the score. It also publishes the image so that we humans can visualize what is happening. In order for the image sequence to make sense, the Simulator waits a bit after having published each image.
+
+### Why did we do it like this?
+The computation cost of the optimal trajectory can be heavy. It may not be realistic to expect it to be done at every time step. Therefore, we simulate the time of the computation of the trajectory by the Agent. Instead, as soon as it is done computing, it sends it to the actuators, observes the world, and starts computing again with the new informations. This is the way it is modeled in this case.
 
 ## Seeing what is happening
 
