@@ -1,7 +1,7 @@
 # Exercise: Motion Planning with Uncertainty {#motion-planning-with-uncertainty status=ready}
 Martin Weiss, Gunshi Gupta, Vincent Mai
 
-The code and technical documentation for this exercise are (here)[https://github.com/mweiss17/pathplanning].
+The code and technical documentation for this exercise are [here](https://github.com/mweiss17/pathplanning).
 
 ## Pre-Requisites
 
@@ -68,7 +68,7 @@ Our solution predicts the probability of the other duckiebot's position in time,
 ### The exercise:
 
 Can you do better than us? In `include/dt_agent`, the file `agent.py` is instantiating a predictor and a planner. Add your own predictor and planner in the same folder, and don't forget to include them in the `include/dt_agent/__init.py__`. Compare with our version by measuring your score at t = 25 sec.
-But first, you'll have to install the whole thing. (Learn how here)[https://github.com/mweiss17/pathplanning].
+But first, you'll have to install the whole thing. [Learn how here](https://github.com/mweiss17/pathplanning).
 
 ## Our results
 Our solution works well. Kind of. Here are some results we would like to share, and a bit of analysis over the issues we are having.
