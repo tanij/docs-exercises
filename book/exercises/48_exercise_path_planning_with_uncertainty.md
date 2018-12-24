@@ -72,7 +72,7 @@ But first, you'll have to install the whole thing. The following sections explai
 
 
 ## Installation
-Prerequisites: ROS Kinetic, Lunar or Melodic, Python 2.7
+Prerequisites: ROS Kinetic, Lunar or Melodic, Python 2.7, catkin, scipy
 
 In `catkin_ws/src`, clone the package, then:
 
