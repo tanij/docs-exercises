@@ -241,7 +241,7 @@ The computation cost of the optimal trajectory can be heavy. It may not be reali
 
 ## Seeing what is happening
 
-You can see what is happening by launching ```$ rqt_image_view``` in a new terminal and follow the topic ```/sim/road_image```. The red circle represents our Duckiebot, driven by the agent. The yellow circle represents the other duckie bot, driving according to the policy of the ```other_duckie_type``` specified in the sim parameters. The dark line in each circle represent their current heading.
+You can see what is happening by launching ```$ rqt_image_view``` in a new terminal and follow the topic ```/sim/road_image```. The red circle represents our Duckiebot, driven by the agent. The yellow circle represents the other duckie bot, driving according to the policy of the ```other_duckie_type``` specified in the sim parameters. The dark line in each circle represent their current heading. The white curve represents the trajectory that our Duckiebot has decided to follow for the next few time steps.
 
 
 ## Parameters
@@ -286,6 +286,60 @@ In `agent.yaml`, you will find the parameters used by the agent to predict, plan
     * `scalar` : raise this number to increase the exploration behavior, lower the number to increase the exploitation behavior of the MCTS
     * `budget` : Iterations of the MCTS through the tree. In each iteration, a new node is added so the tree is expanded.
     * `time_steps` : amount of time steps the MCTS is looking ahead
+
+## Our results
+Our solution works well. Kind of. Here are some results we would like to share, and a bit of analysis over the issues we are having.
+
+### Gifs
+These gifs show the output of the visualizer with different MCTS parameters. We took the case of the truck coming towards us, with a random acceleration picked from a continuous uniform distribution from -2 m/s to + 2 m/s at each time step. The trajectory was recomputed every 3 time steps.
+
+#### With default parameters
+![](images/default-params-initial.gif)
+
+MCTS parameters:
+  * scalar: 1.414
+  * budget: 5300
+  * time_steps: 50
+  Score at t = 20: -3951
+  
+#### With 20 time steps
+![](images/20timesteps.gif)
+
+ MCTS parameters:
+  * scalar: 1.414
+  * budget: 5300
+  * time_steps: 20
+
+#### With a budget of 2000 iterations
+![](images/2000-iterations.gif)
+
+MCTS parameters:
+  * scalar: 1.414
+  * budget: 2000
+  * time_steps: 50
+
+#### Increasing the explore parameter to 2
+![](images/explore-parameter-2.gif)
+
+MCTS parameters:
+  * scalar: 2
+  * budget: 5300
+  * time_steps: 50
+
+### Analysis
+#### Fluidity of the gifs
+the gifs are not very fluid. Why? In order to accelerate the gifs, we removed the waiting time at each time step. Therefore, the Simulator goes very quickly through 3 time steps, and then waits for the Agent to compute the next trajectory.
+
+#### Variable trajectory length
+The trajectory length is not constant. Sometimes, it is very short, sometimes, very long. This is because the depth of the tree changes depending on the region it is being optimised in. In some regions, the tree can have a lot of children with competitive reward possibilities, so the tree becomes wider, but less deep. Therefore, the optimal path might have a different length.
+
+#### Avoiding the Duckiebot
+The agent always avoids the other Duckiebot! That's great - it shows that our algorithm is working!
+
+#### Avoiding to get out of the road
+However, our agent somehow decides to get completely out of the road. This is bad, because we set the negative reward of being completely out of the road as bad as having a collision! Additionnally, it is not necessary to avoid the other Duckiebot. What is happening here?
+
+Our analysis of the problem is that our MCTS does not explore enough at the very beginning. When the agent plans to go out of the road on a long term trajectory, it correctly does not get completely out of the road. However, when the agent follows this trajectory, it has at some point to be partially out of the road and looking to the right. Its trajectory plans that the next step will be turning on the left, and all will be fine.But, just when it gets there, the trajectory is completely recomputed! Unluckily, the agent chooses to simply go forward as a first step instead of exploring the other directions.
 
 ## Drive Safe
 
