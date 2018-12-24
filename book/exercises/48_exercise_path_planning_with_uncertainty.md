@@ -58,20 +58,20 @@ Similar to the setup in Duckietown, we have a small positive reward for staying 
 
 ### Problem we want to solve:
 
-Imagine you are driving on a straight road, in your lane, when you suddenly see in front of you a big truck driving on the middle of the road. It is so big, that you have no choice but to avoid it by partially going out of the road. The thing is, you know that the guy driving is a bit sleepy: he does not touch the wheel, but he plays with the accelerator and the break pedal randomly. How do you plan your trajectory to avoid collision while minimizing your driving partially out of the road?
-This problem gives us two possible cases: when the truck is coming towards us, or when it is going in the same direction than us. The solution should be able to perform well in these two cases.
+Imagine you are driving on a straight two-lane road, you're in your lane, when you suddenly see in front of you a big truck driving down the middle of the road! It is so big, that you have no choice but to avoid it by partially driving off the road. You know he's coming right at you (constant angle), but you're not sure how fast (his acceleration changes randomly). How do you plan your trajectory to avoid collision and minimize your off-road adventure?
+This problem comes in two flavours: the truck is oncoming, or it is going in the same direction as us. A robust solution should perform well in both cases.
 
 ### Our solution:
 
-Our solution predicts the probability of the other duckiebot's position in time, using the velocity probabilistic model to propagate its possible positions over a one-dimensional discretized map. It is then able to compute the probability of collision for our Duckiebot at any position and time. This is used by a Monte Carlo Tree Search algorithm in order to compute a probable reward at each node, and to approximate our optimal trajectory up to a given time horizon.
+Our solution predicts the probability of the other duckiebot's position w.r.t. time, using a probabilistic velocity model to propagate its possible positions over a one-dimensional discretized map. We are then able to compute the probability of a collision at any position and time. We use a Monte Carlo Tree Search algorithm to compute rewards for states in this map and approximate our optimal trajectory up to a given time horizon.
 
 ### The exercise:
 
-Can you do better than us? In `include/dt_agent`, the file `agent.py` is instantiating a predictor and a planner. Add your own predictor and planner in the same folder, and don't forget to include them in the `include/dt_agent/__init.py__`. Compare with our version by measuring your score at t = 25 sec.
-But first, you'll have to install the whole thing. [Learn how here](https://github.com/mweiss17/pathplanning).
+Can you do better than us? We instantiate a predictor and a planner in `include/dt_agent/agent.py`. Add your own predictor and planner in the same folder, and don't forget to include them in the `include/dt_agent/__init.py__`. Compare with our version by measuring your score at t = 25 sec.
+But first, you'll have to install the thing (which should take ~30 minutes if you've got the pre-requisite ROS installation and a couple hours if you have to install Ubuntu and ROS). [Find our code and learn how to use it here](https://github.com/mweiss17/pathplanning).
 
 ## Our results
-Our solution works well. Kind of. Here are some results we would like to share, and a bit of analysis over the issues we are having.
+Our solution works well. Kind of. Here are some results and analysis we would like to share.
 
 ### Gifs
 These gifs show the output of the visualizer with different MCTS parameters. We took the case of the truck coming towards us, with a random acceleration picked from a continuous uniform distribution from -2 m/s to + 2 m/s at each time step. The trajectory was recomputed every 3 time steps.
