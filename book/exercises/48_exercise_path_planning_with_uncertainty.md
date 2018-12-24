@@ -343,7 +343,7 @@ Our analysis of the problem is that our MCTS does not explore enough at the very
 This problem could be reduced by reducing the time step duration, increasing the exploration or increasing the amount of time steps for which the trajectory is followed. However, the two first options induce a higher computation time for the agent, whereas the last option means driving with more uncertainty, which adds to the probability of a collision.
 
 #### Influence of the parameters
-Frankly, we find that the 4 experiments look pretty similar. The parameters change a bit the behavior: a lower number of time steps lowers the length of the trajectory, a higher scalar makes the trajectory move a bit more. But overall, they do not affect the performance so much. We would love to have a more complete analysis to show you, but we hope you will agree with us!
+Frankly, we find that the 4 experiments look pretty similar. The parameters change a bit the behavior: a lower number of time steps lowers the length of the trajectory, a higher scalar makes the trajectory move a bit more and a smaller tree depth. But overall, they do not affect the performance so much. We would love to have a more complete analysis to show you, but we hope you will agree with us!
 
 ## Drive Safe
 
