@@ -24,27 +24,34 @@ By the end of this demo, you should be able to visualize a map of the colored la
 <figure>
     <figcaption>Examples of expected visualizations at different time steps: </figcaption>
 	<figure>
-	    <figcaption>Map after X seconds</figcaption>
+	    <figcaption>Map after 15 seconds</figcaption>
 	    <img style='width:20em; height:15em' src="figures/map1.png"/>
 	</figure>
 	<figure>
-	    <figcaption>Map after Y seconds (Y > X)</figcaption>
+	    <figcaption>Map after 30 seconds</figcaption>
 	    <img style='width:20em; height:15em' src="figures/map2.png"/>
 	</figure>
 	<figure>
-	    <figcaption>Map after Z seconds (Y > X and Z >> X)</figcaption>
+	    <figcaption>Map after 60 seconds</figcaption>
 	    <img style='width:20em; height:15em' src="figures/map3.png"/>
 	</figure>
 </figure>
 
 ## Instructions
 ### Prerequisites
-As mentioned, we build a map on a log of a duckiebot. To run the following demo, you'll need the actual log (a `.bag` file), in which the image seen by the robot is recorded (probably using the `ros-picam` node), as well as some source of odometry (in our code we use published executed wheel commands, but you could use any other odometry method).
+As mentioned, we build a map on a log of a duckiebot. To run the following demo, you'll need the following:
 
-You'll also need a Linux computer with ROS.
+* An actual _log_ (a `.bag` file), in which the image seen by the robot is recorded (probably using the `ros-picam` node), as well as some source of odometry (in our code we use published executed wheel commands, but you could use any other odometry method). Here is a log file you can use which has the required information: [rosbag file](https://drive.google.com/file/d/1L6wHbDHEj4lb9FHX6smMZLZaaE2RdTIl/view?usp=sharing).
+* A computer with _ROS Kinetic_.
+* The _lane-slam_ repository which you can download and build with the following commands:
 
-The main Lane-SLAM repository is [here](https://github.com/mandanasmi/lane-slam). Clone the repo and you'll have the ROS workspace containing all packages required. You can build that workspace and source before trying to run anything.
-
+```
+cd ~
+git clone https://github.com/mandanasmi/lane-slam.git
+cd lane-slam
+catkin build
+source devel/setup.bash
+```
 
 ### Shortcut to run the whole thing quickly and easily
 If you want to see the actual output of our solution quickly, we provide a launch file which runs every necessary node.
@@ -93,6 +100,7 @@ This package uses _OpenCV_ functions to compute binary descriptors for a bunch o
 This package is a copy of the `ground_projection` module from the Duckietown software stack. It takes in a list of line segments detected in the image and projects them onto the 3D ground plane using a homography matrix computed based on the extrinsic calibration parameters.  
 
 To ensure that the node runs, you must have the following.
+
 1. The robot's (eg. *neo*'s) extrinsic parameters must be placed in `lane-slam/duckietown/config/baseline/calibration/camera_extrinsic/neo.yaml`.  
 2. Edit `lane-slam/src/ground_projection/launch/ground_projection.launch`. Around line 13, where the `ground_projection` node is being launched, set the topic names. `~lineseglist_in` should contain the name of a topic to which line segments detected in an image are published to. (This is, in most cases, the topic to which the `line_detector` node publishes). `~cali_image` should contain a topic onto which the raw image is published (eg. `/neo/camera_node/image/raw`), and `camera_info` is a topic onto which camera info is published (eg. `/neo/camera_node/camera_info`)  
 
@@ -166,3 +174,19 @@ roslaunch show_map show_map_node.launch veh:=duckiebot_name
 ```
 
 With the log and other previous nodes running, you should see the map being built.
+
+## Future improvements
+There are several ways in which people can extend our codebase. We have built stubs for most of these functionalities.
+
+
+1. *Still better line detection:* Train a neural network to detect lines? Or better, have an ensemble of traditional and learnt components in parallel? This is one avenue where there's a lot of room for improvement.
+Any new line detection method can be implemented as a class in the `line_detector` package. For an example look at `line_detector_lsd.py`. There are a bunch of methods you can implement, and voila! A new line detector is born.
+
+
+2. *Magic filters:* The `line_sanity` package has a number of _magic filters_ that help filter out spurious line segments. One can implement any number of fancy filters to provide more advanced functionality.
+
+
+3. *Graph optimization:* One way people can use the odometry provided here is to construct a pose graph using popular graph optimization libraries such as `g2o` and `GTSAM`. _AprilTags_, or other cues that solve the _place recognition_/_relocalization_ problems can be used to induce loop closure constraints, and the optimized graph can result in a much more stable, accurate reconstruction.
+
+
+4. *Prior knowledge:* Extending the above note on graph optimization, one can bake in prior knowledge about _Duckietown_ into the graph optimization pipeline (in two ways). The first way involves imposing prior knowledge at the frontend-level. The _magic filters_ can now take into account priors that stipulate a well-set road line topology (eg. there must only be one yellow strip at the center of the road; other spurious line detections there must be suppressed, etc.). The second way involves imposing prior knowledge as constraints in the backend pose-graph. This could include the constraints that most turns are 90 degrees, or that the same AprilTag is observed, and the like.
