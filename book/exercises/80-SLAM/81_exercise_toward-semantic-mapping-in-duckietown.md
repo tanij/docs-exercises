@@ -28,8 +28,12 @@ By the end of this demo, you should be able to visualize a map of the colored la
 	    <img style='width:20em; height:15em' src="figures/map1.png"/>
 	</figure>
 	<figure>
-	    <figcaption>Map after Y seconds</figcaption>
+	    <figcaption>Map after Y secondss</figcaption>
 	    <img style='width:20em; height:15em' src="figures/map2.png"/>
+	</figure>
+	<figure>
+	    <figcaption>Map after Z seconds</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map3.png"/>
 	</figure>
 </figure>
 
