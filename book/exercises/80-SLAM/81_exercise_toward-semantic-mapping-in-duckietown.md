@@ -56,8 +56,23 @@ This package uses _OpenCV_ functions to compute binary descriptors for a bunch o
 
 ### Line Sanity
 
-In this package, we filter spurious lines and make odometry estimates smooth as well as remove the error of line detector which can cause of having lines which are too short or too long.
+In this package, we filter spurious lines and make odometry estimates smooth as well as remove the error of line detector which can cause of having lines which are too short or long, or they're not clear due to their distance from the robot.
 
+This package takes in _ground-projected_ line segments and _filters out_ spurious lines. It subscribes to a topic that publishes a `SegmentList` message type, applies filters, and publishes the filtered line segments to another topic `filtered_segments_lsd` (again, as a `SegmentList` message type).
+
+To ensure this node works, you need to set up the following topics in `lane-slam/src/line_sanity/launch/line_sanity.launch`. Assume your duckiebot is named *neo*.
+1. By default, the `line_sanity_node` publishes to the topic `/neo/line_sanity_node/filtered_segments_lsd`. If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
+```<remap from="~filtered_segments_lsd" to="name/of/topic/you/want/to/publish/to" />```
+2. By default, the `line_sanity_node` subscribes to the topic `/neo/ground_projection/lineseglist_out_lsd`. If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
+```<remap from="/neo/ground_projection/lineseglist_out_lsd" to="name/of/topic/you/want/to/subscribe/to" />```
+
+*IMPORTANT:* This node will only work if the `SegmentList` that the node subscribes to has already been ground-projected. Else, there will be several `ValueError`s.
+
+*Types of spurious lines filtered out:*
+1. Lines behind the robot
+2. Lines that are not white or yellow, and cannot be confidently classified as being left or right edges of a white or yellow line (we ignore RED lines for now).
+3. Lines that are farther ahead from the robot, above a certain distance threshold.
+4. All lines that do not satisfy a certain angular threshold.
 
 ### Odometry
 
