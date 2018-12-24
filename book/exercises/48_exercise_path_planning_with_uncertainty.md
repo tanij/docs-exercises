@@ -300,7 +300,6 @@ MCTS parameters:
   * scalar: 1.414
   * budget: 5300
   * time_steps: 50
-  Score at t = 20: -3951
   
 #### With 20 time steps
 ![](images/20timesteps.gif)
@@ -339,7 +338,9 @@ The agent always avoids the other Duckiebot! That's great - it shows that our al
 #### Avoiding to get out of the road
 However, our agent somehow decides to get completely out of the road. This is bad, because we set the negative reward of being completely out of the road as bad as having a collision! Additionnally, it is not necessary to avoid the other Duckiebot. What is happening here?
 
-Our analysis of the problem is that our MCTS does not explore enough at the very beginning. When the agent plans to go out of the road on a long term trajectory, it correctly does not get completely out of the road. However, when the agent follows this trajectory, it has at some point to be partially out of the road and looking to the right. Its trajectory plans that the next step will be turning on the left, and all will be fine.But, just when it gets there, the trajectory is completely recomputed! Unluckily, the agent chooses to simply go forward as a first step instead of exploring the other directions.
+Our analysis of the problem is that our MCTS does not explore enough at the very beginning. When the agent plans to go out of the road on a long term trajectory, it correctly does not get completely out of the road. However, when the agent follows this trajectory, it has at some point to be partially out of the road and looking to the right. Its trajectory plans that the next step will be turning on the left, and all will be fine.But, just when it gets there, the trajectory is completely recomputed! Unluckily, the agent chooses to simply go forward as a first step instead of exploring the other directions. This leads to the agent getting lost in the wild... for a small amount of time, until it gets back on the road. 
+
+This problem could be reduced by reducing the time step duration, increasing the exploration or increasing the amount of time steps for which the trajectory is followed. However, the two first options induce a higher computation time for the agent, whereas the last option means driving with more uncertainty, which adds to the probability of a collision.
 
 ## Drive Safe
 
