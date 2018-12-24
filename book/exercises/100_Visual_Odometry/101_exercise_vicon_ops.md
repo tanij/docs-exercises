@@ -28,7 +28,7 @@ This part will show briefly how to set up a Vicon system.
 On the Vicon server (Windows), launch the _Vicon Tracker_ application and make sure that all the cameras are connected (green).
 
 <div figure-id="fig:vicon_tracker">
-<img src="images/Vicon_tracker_full.png" style="width: 60%"/>
+<img src="images/vicon_tracker_full.png" style="width: 60%"/>
 <figcaption>Vicon Tracker </figcaption>
 </div>
 
@@ -58,8 +58,13 @@ Place the Active Wand at the desired origin and set it in Vicon Tracker
 </div>
 
 
-### Frequency
-To write
+### Vicon data sampling frequency
+The default sampling frequency is 100Hz. You can change the requested frame rate up to 250Hz.
+
+<div figure-id="fig:sam_freq">
+<img src="images/vicon_freq.png" style="width: 15em"/>
+<figcaption>Sampling frequency </figcaption>
+</div>
 
 The Vicon system is now ready to be used.
 
@@ -88,18 +93,56 @@ Place at least three [markers](https://www.vicon.com/products/vicon-devices/mark
 
 
 ### Create a Vicon object
-To write
+Select the markers that define the object and click `Create` in the Objects tab of the `Vicon Tracker` application ([](#fig:create_obj)).
+
+<div figure-id="fig:create_obj">
+<img src="images/vicon_create_obj.png" style="width: 22em"/>
+<figcaption>Creating an object </figcaption>
+</div>
+
+You can also change the origin and the orientation of the object as documented [here](https://docs.vicon.com/display/Tracker33/About+the+Objects+tab). Vicon  uses the standard engineering coordinate system of $x$ axe - forward (Red), $y$ axe - right (Green), $z$ axe - up (Blue).
+
 
 ### Check the Vicon Data
-To write
+Finally, you can track your object with Vicon and trace its pose as shown in [](#fig:graph)
+
+<div figure-id="fig:graph">
+<img src="images/vicon_graph.png" style="width: 22em"/>
+<figcaption>Tracking an object </figcaption>
+</div>
+
 
 ## Vicon and ROS {#ros-setup status=ready}  
 ### Install ROS interface and dependencies
-To write
+You can use the ROS interface for [VRPN Client](http://www.cs.unc.edu/Research/vrpn/).
 
-### Network setup
-To write
+Go to your workspace, clone and build this repo and its dependencies:
+
+
+
+    laptop $ cd ![your_ws]/src
+    laptop $ git clone https://github.com/MRASL/ros_vrpn_client
+    laptop $ git clone https://github.com/ethz-asl/vrpn_catkin
+    laptop $ git clone https://github.com/catkin/catkin_simple.git
+    laptop $ git clone https://github.com/ethz-asl/glog_catkin.git
+    laptop $ cd .. & catkin build
+
+
 
 ### Publishing Vicon data to the ROS Network
-Launch the Vicon node
-To write
+Run the node `vrpn_client` using the launch file `mrasl_vicon_duckiebot`
+
+
+    laptop $ roslaunch ros_vrpn_client mrasl_vicon_duckiebot.launch object_name:=![vicon_object_name]
+
+
+This launch file is a copy of the original `asl_vicon.launch`, using for the object `vicon_object_name` and the Vicon server IP 192.168.1.200.
+
+Using `rostopic list`, you can see the following topics from Vicon:
+
+
+    /duckiebot_razor/vrpn_client/estimated_odometry                                                      /duckiebot_razor/vrpn_client/estimated_transform                                                     
+    /duckiebot_razor/vrpn_client/raw_transform                                                           
+    /duckiebot_razor/vrpn_client/vicon_intermediate_results                                              
+    /rosout                                                                                               
+    /rosout_agg         
