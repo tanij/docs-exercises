@@ -1,5 +1,5 @@
 
-# Exercise: Towards Semantic Mapping in Duckietown: Building a map of Duckietown lanes {#semantin-mappping status=draft}
+# Exercise: Towards Semantic Mapping in Duckietown: Building a map of Duckietown lanes {#semantic-mappping status=draft}
 
 ## Skills learned
 
@@ -24,12 +24,16 @@ By the end of this demo, you should be able to visualize a map of the colored la
 <figure>
     <figcaption>Examples of expected visualizations at different time steps: </figcaption>
 	<figure>
-	    <figcaption>Map after X secondss</figcaption>
+	    <figcaption>Map after X seconds</figcaption>
 	    <img style='width:20em; height:15em' src="figures/map1.png"/>
 	</figure>
 	<figure>
-	    <figcaption>Map after Y seconds</figcaption>
+	    <figcaption>Map after Y seconds (Y > X)</figcaption>
 	    <img style='width:20em; height:15em' src="figures/map2.png"/>
+	</figure>
+	<figure>
+	    <figcaption>Map after Z seconds (Y > X and Z >> X)</figcaption>
+	    <img style='width:20em; height:15em' src="figures/map3.png"/>
 	</figure>
 </figure>
 
