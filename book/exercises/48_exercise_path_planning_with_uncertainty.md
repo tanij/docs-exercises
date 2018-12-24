@@ -154,6 +154,14 @@ For visualization purposes, the node also publishes this topic:
 #### Service
 The ```get_ground_type``` service can be called to return the ground type on which a robot with a given position and radius would be.
 
+### Technical details
+
+#### Coordinate system
+We use a fixed coordinate system (it does not follow our Duckiebot).
+  * *x* is the lateral coordinate, raising from left to right. It is 0 at the center of the right lane. It is in meters.
+  * *y* is the vertical coordinate., raising from down to up. It is 0 at the initial position of our Duckiebot. It is in meters.
+  * *theta* is the angular coordinate. It is 0 when looking up, *-pi*/2 when looking left, *pi* when looking down and yes, * pi/2* when looking right. Yes, we know, it is the other way around than the usual definition. It was made "on purpose" to reward those who read the instructions completely. It is in radians.
+
 #### How is our Duckiebot movement encoded?
 
 When the `orientation_seq` message arrives, it contains a sequence of orientations in radians. We consider that our Duckiebot has a constant speed and cannot accelerate nor break. Therefore, at each time step, it will follow the orientation given by `orientation_seq`. 
@@ -162,7 +170,6 @@ Note that the Duckiebot cannot turn extremely fast. Therefore, we limit its orie
 #### How is the other Duckiebot movement working?
 
 The other Duckiebot is going straight forward. Remember: it is a truck and the sleepy driver does not touch the wheel. However, the driver plays with the accelerator and the breaks. We model this by drawing, at every time step, an acceleration from an uniform distribution. The truck is not unlimited though: it has a minimum and a maximal velocity, from which it cannot respectively break or accelerate anymore.
-
 
 ## Manager Node
 ### Purpose
