@@ -67,13 +67,13 @@ Our solution predicts the probability of the other duckiebot's position w.r.t. t
 
 ### The exercise:
 
-Can you do better than us? We instantiate a predictor and a planner in `include/dt_agent/agent.py`. Add your own predictor and planner in the same folder, and don't forget to include them in the `include/dt_agent/__init.py__`. Compare with our version by measuring your score at t = 25 sec.
+Can you do better than us? We instantiate a predictor and a planner in `include/dt_agent/agent.py`. Add your own predictor and planner in the same folder, and don't forget to include them in `include/dt_agent/__init.py__`. Compare with our version by measuring your score at t = 25 sec.
 But first, you'll have to install the thing (which should take ~30 minutes if you've got the pre-requisite ROS installation and a couple hours if you have to install Ubuntu and ROS). [Find our code and learn how to use it here](https://github.com/mweiss17/pathplanning).
 
-## Our results
-Our solution works well. Kind of. Here are some results and analysis we would like to share.
+## Results
 
-### Gifs
+Our solution works well. Kind of.
+
 These gifs show the output of the visualizer with different MCTS parameters. We took the case of the truck coming towards us, with a random acceleration picked from a continuous uniform distribution from -2 m/s to + 2 m/s at each time step. The trajectory was recomputed every 3 time steps.
 
 #### With default parameters
@@ -110,7 +110,7 @@ MCTS parameters:
 
 ### Analysis
 #### Fluidity of the gifs
-the gifs are not very fluid. Why? In order to accelerate the gifs, we removed the waiting time at each time step. Therefore, the Simulator goes very quickly through 3 time steps, and then waits for the Agent to compute the next trajectory.
+The gifs are not very fluid. Why? In order to accelerate the gifs, we removed the waiting time at each time step. Therefore, the Simulator goes very quickly through 3 time steps, and then waits for the Agent to compute the next trajectory.
 
 #### Variable trajectory length
 The trajectory length is not constant. Sometimes, it is very short, sometimes, very long. This is because the depth of the tree changes depending on the region it is being optimised in. In some regions, the tree can have a lot of children with competitive reward possibilities, so the tree becomes wider, but less deep. Therefore, the optimal path might have a different length.
@@ -118,16 +118,17 @@ The trajectory length is not constant. Sometimes, it is very short, sometimes, v
 #### Avoiding the Duckiebot
 The agent always avoids the other Duckiebot! That's great - it shows that our algorithm is working!
 
-#### Avoiding to get out of the road
-However, our agent somehow decides to get completely out of the road. This is bad, because we set the negative reward of being completely out of the road as bad as having a collision! Additionnally, it is not necessary to avoid the other Duckiebot. What is happening here?
+#### Staying on the road
+Our agent sometimes completely drives off the road. This is bad, because we decided that having a collision should yield as big a negative reward as completely leaving the road! It is not necessary to drive entirely off the road to avoid the other Duckiebot. What is happening here?
 
-Our analysis of the problem is that our MCTS does not explore enough at the very beginning. When the agent plans to go out of the road on a long term trajectory, it correctly does not get completely out of the road. However, when the agent follows this trajectory, it has at some point to be partially out of the road and looking to the right. Its trajectory plans that the next step will be turning on the left, and all will be fine.But, just when it gets there, the trajectory is completely recomputed! Unluckily, the agent chooses to simply go forward as a first step instead of exploring the other directions. This leads to the agent getting lost in the wild... for a small amount of time, until it gets back on the road. 
+Our analysis of the problem is that our MCTS does not explore enough at the very beginning. When we look at the long-term trajectory that our agent makes to avoid the truck, it looks correct. However, when the agent follows this trajectory, it has at some point to be partially out of the road and looking to the right. Its trajectory plans states that the next step will be turning to the left, and all will be fine. But sometimes it recomputes its trajectory at just the wrong time. This unlucky agent runs its MCTS and randomly selects forward as a first step instead of exploring the other directions. This leads to the agent getting lost in the wild... for a brief time, until it gets back on the road. 
 
-This problem could be reduced by reducing the time step duration, increasing the exploration or increasing the amount of time steps for which the trajectory is followed. However, the two first options induce a higher computation time for the agent, whereas the last option means driving with more uncertainty, which adds to the probability of a collision.
+This problem could be solved by reducing the time step duration, increasing the exploration or increasing the number of time steps for which the trajectory is followed. However, the two first options induce a higher computation time for the agent, whereas the last option means driving with more uncertainty, which adds to the probability of a collision.
 
 #### Influence of the parameters
-Frankly, we find that the 4 experiments look pretty similar. The parameters change a bit the behavior: a lower number of time steps lowers the length of the trajectory, a higher scalar or a higher number of iterations makes the trajectory move a bit more but give a smaller tree depth. But overall, they do not affect the performance so much. We would love to have a more complete analysis to show you, but we hope you will agree with us!
+Frankly, we find that the 4 experiments look pretty similar. The parameters change a bit the behavior: a lower number of time steps lowers the length of the trajectory, a higher scalar or a higher number of iterations makes the trajectory move a bit more but give a smaller tree depth. But overall, they do not affect the performance so much.
 
 ## Drive Safe
+We're happy to help future citizens of duckietown with the extension of this work -- just reach out! We feel that there is more work to be done representing uncertainty in vehicle position and heading. Particularly exciting extensions may explore interactions between vehicles, lights, and pedestrians at intersections. 
 
 ![](images/cool_duck.gif)
