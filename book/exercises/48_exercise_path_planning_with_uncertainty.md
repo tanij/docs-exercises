@@ -237,7 +237,7 @@ You will have noticed that the nodes do not run in real time. Instead, it is a s
 At every time step, the Simulator also publishes the ground truth state so that the Manager can record the trajectory and count the score. It also publishes the image so that we humans can visualize what is happening. In order for the image sequence to make sense, the Simulator waits a bit after having published each image.
 
 ### Why did we do it like this?
-The computation cost of the optimal trajectory can be heavy. It may not be realistic to expect it to be done at every time step. Therefore, we simulate the time of the computation of the trajectory by the Agent. Instead, as soon as it is done computing, it sends it to the actuators, observes the world, and starts computing again with the new informations. This is the way it is modeled in this case.
+The computation cost of the optimal trajectory can be heavy. It may not be realistic to expect it to be done at every time step. In the real world, as soon as the Agent is done computing, it sends it to the actuators, observes the world, and starts computing again with the new informations. This is the way it is modeled in this case.
 
 ## Seeing what is happening
 
