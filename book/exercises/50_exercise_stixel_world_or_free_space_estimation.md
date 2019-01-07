@@ -1,4 +1,4 @@
-# Exercise: Free space estimation with Stixel World
+# Exercise: Free space estimation with Stixel World {status=ready}
 
 Assigned: Laurent Mandrile and David Abraham
 
@@ -21,9 +21,9 @@ Stixel representation is a middle ground between pixel and object level represen
 A stixel is a rectangular “stick” of a given width defined by its 3D orientation relative to the camera. Its height is defined by the bounding box of the object it represents. And free space is represented by the area between stixel agglomerations.
 
 
-<div figure-id="fig:example1" figure-class="flow-subfigures">
-    <img figure-id="stixel obtaining flow" src='evolution.png'/>
-</div>
+<figure >
+    <img style='width:8em' src="evolution.png"/>
+</figure>
 
 
 ### Building the stixel world
@@ -55,9 +55,9 @@ If it does not deviate more than a maximal distance from the expected disparity 
 From the cost image we can extract the height of the obstacles. For each column, the height is where the cost is at its maximum.
 
 
-<div figure-id="fig:example2" figure-class="flow-subfigures">
-    <img figure-id="Cost function" src='cost.png'/>
-</div>
+<figure>
+    <img style='width:8em' src="cost.png"/>
+</figure>
 
 
 ### stixel extraction
@@ -108,4 +108,6 @@ Uncompress the downloaded tarball to your preferred location and cd into it. To 
 
 Here's an example of what you should see:
 
-![stixel-world example](stixel-world-demo.gif)
+<figure>
+   <img style='width:8em' src="stixel-world-demo.gif" />
+</figure>
