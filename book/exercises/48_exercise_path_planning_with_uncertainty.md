@@ -22,28 +22,28 @@ During the lectures, we saw many classic methods of motion planning such as grap
 
 We are going to focus on a significantly more difficult problem in this tutorial, planning under uncertain conditions. There are many kinds of uncertainty including uncertainty over your initial state, your action model, and your noisy sensors.
 
-
-![I'm not sure what's happening here](images/duckswap.jpg)
-<br>
-*I'm not sure what's happening here*
+<figure>
+    <figcaption> I'm not sure what's happening here </figcaption>
+    <img style='width:8em' src="duckswap.jpg"/>
+</figure>
 
 The world is inherently dynamic, but the algorithms we've looked at don't directly deal with dynamic obstacles. A naive solution is to, at each time-step, update your belief over the world-state (presumably reflecting the new position of dynamic objects in your environment) then regenerate your plan as though all obstacles are static. A bit more advanchttps://github.com/mweiss17/docs-exercisesed solution may estimate the average velocity of dynamic obstacle across recent time-steps, then assume it will continue in the same way. The following work devises a way to remove egocentric movement from the motion prediction for dynamical obstacles.
 
 
-![I'm not sure what's happening here](images/future_bounding_box.png)
-<br>
-Egocentric Vision-Based  Future Vehicle Localization for Intelligent Driving Assistance Systems<br>
+<figure>
+    <figcaption> Egocentric Vision-Based  Future Vehicle Localization for Intelligent Driving Assistance Systems, 
 *Yu Yao∗, Mingze Xu∗ , Chiho Choi, David J. Crandall, Ella M. Atkins, and Behzad Dariush*
-</center>
-<br>
+ </figcaption>
+    <img style='width:8em' src="future_bounding_box.png"/>
+</figure>
 
 
 Creating a good model of dynamic obstacles is much, much harder than it sounds. Humans mess this up all the time. Take, for example, the situation presented in the image above. You're trying to turn left, you have a green light, and no one is currently in your way. We see that the path-planning module, using its estimates of the oncoming vehicles position at previous timesteps, is predicting that the silver oncoming Mercedes is going to get in our way. But what if that driver is some kind of maniac and swerves in front of you? It happens. There's an enormous amount of unavailable information that must be modeled as uncertainty.
 
-![](images/lambo.gif)
-<br>
-*We don't always know who's coming down the road, but sometimes it's this maniac in a lambo*
-<br>
+<figure>
+    <figcaption> We don't always know who's coming down the road, but sometimes it's this maniac in a lambo </figcaption>
+    <img style='width:8em' src="lambo.gif"/>
+</figure>
 
  To approach this problem we created an entirely deterministic situation in our simulator, added some stochastic behaviour to an oncoming duckiebot, created a probability distribution over their velocity, and use that distribution to inform our motion plan.
 
@@ -77,7 +77,9 @@ Our solution works well. Kind of.
 These gifs show the output of the visualizer with different MCTS parameters. We took the case of the truck coming towards us, with a random acceleration picked from a continuous uniform distribution from -2 m/s to + 2 m/s at each time step. The trajectory was recomputed every 3 time steps.
 
 #### With default parameters
-![](images/default-params-initial.gif)
+<figure class="caption-left">
+    <img style='width:4em' src="default-params-initial.gif"/>
+</figure>
 
 MCTS parameters:
   * scalar: 1.414
@@ -85,7 +87,9 @@ MCTS parameters:
   * time_steps: 50
   
 #### With 20 time steps
-![](images/20timesteps.gif)
+<figure class="caption-left">
+    <img style='width:4em' src="20timesteps.gif"/>
+</figure>
 
  MCTS parameters:
   * scalar: 1.414
@@ -93,7 +97,9 @@ MCTS parameters:
   * time_steps: 20
 
 #### With a budget of 2000 iterations
-![](images/2000-iterations.gif)
+<figure class="caption-left">
+    <img style='width:4em' src="2000-iterations.gif"/>
+</figure>
 
 MCTS parameters:
   * scalar: 1.414
@@ -101,7 +107,9 @@ MCTS parameters:
   * time_steps: 50
 
 #### Increasing the explore parameter to 2
-![](images/explore-parameter-2.gif)
+<figure class="caption-left">
+    <img style='width:4em' src="explore-parameter-2.gif"/>
+</figure>
 
 MCTS parameters:
   * scalar: 2
@@ -131,4 +139,7 @@ Frankly, we find that the 4 experiments look pretty similar. The parameters chan
 ## Drive Safe
 We're happy to help future citizens of duckietown with the extension of this work -- just reach out! We feel that there is more work to be done representing uncertainty in vehicle position and heading. Particularly exciting extensions may explore interactions between vehicles, lights, and pedestrians at intersections. 
 
-![](images/cool_duck.gif)
+<figure class="caption-left">
+    <img style='width:8em' src="cool_duck.gif"/>
+</figure>
+
