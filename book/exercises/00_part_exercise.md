@@ -1,6 +1,6 @@
 # Exercises {#book:exercises status=ready nonumber=1}
 
-Maintainer: Liam Paull
+
 
 # Image operations {#part:image-ops status=ready}
 

@@ -1,6 +1,6 @@
 # Exercise: Lane Filtering - Extended Kalman Filter {#exercise-filtering-ekf status=ready}
 
-Assigned: Liam Paull
+
 
 ## Skills learned
 

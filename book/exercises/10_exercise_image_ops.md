@@ -1,6 +1,4 @@
-# Exercise: Basic image operations {#exercise-basic-image status=beta}
-
-Assigned: Andrea Daniele
+# Exercise: Basic image operations {#exercise-basic-image status=ready}
 
 ## Skills learned
 

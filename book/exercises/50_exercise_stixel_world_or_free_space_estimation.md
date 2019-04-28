@@ -1,7 +1,5 @@
 # Exercise: Free space estimation with Stixel World {status=ready}
 
-Assigned: Laurent Mandrile and David Abraham
-
 ## Skills learned
 
 - What is free space estimation
@@ -30,7 +28,7 @@ A stixel is a rectangular “stick” of a given width defined by its 3D orienta
 
 Stixel world construction starts with a stereo vision analysis to get a disparity map.
 
-### Building the occupancy grid 
+### Building the occupancy grid
 
 Afterwards, an occupancy grid is computed from the stereo data.
 An occupancy grid is a 2D representation which models occupied pixels in an image of the environment.
@@ -43,14 +41,14 @@ A background subtraction is carried out All occupied cells behind the first maxi
 
 Find the first obstacle when starting from the bottom Only the first obstacle is taken into account.
 
-### Height Segmentation 
+### Height Segmentation
 
 Height of objects is obtained by finding the optimal segmentation between the foreground and the background.
 Afterwards, we compute the membership value of each point to a given object: The image is divided in columns. For each column a foreground object starts where the free space ends.
 Then, the object continues column-wise and each point on the image votes for its membership to the foreground object
 If it does not deviate more than a maximal distance from the expected disparity of the object based on the sgm analysis, the disparity votes positively. Otherwise, it votes negatively.
 
-### Cost Image 
+### Cost Image
 
 From the cost image we can extract the height of the obstacles. For each column, the height is where the cost is at its maximum.
 

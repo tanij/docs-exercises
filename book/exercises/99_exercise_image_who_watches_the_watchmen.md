@@ -1,5 +1,5 @@
 
-# Exercise: Who watches the watchmen? (optional) {#exercise-watchmen status=draft}
+# Exercise: Who watches the watchmen? (optional) {#exercise-watchmen status=ready}
 
 ## Skills learned
 

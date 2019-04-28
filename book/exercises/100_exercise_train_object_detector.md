@@ -1,11 +1,9 @@
-# Exercise: Train an object detector {#exercise-object-detector status=draft}
-
-Assigned: Orlando Marquez and Jon Plante
+# Exercise: Train an object detector {#exercise-object-detector status=ready}
 
 ## Skills learned
 
 - Label images from Duckietown logs to perform object detection
-- Prepare data to train a neural network that performs object detection: YOLO 
+- Prepare data to train a neural network that performs object detection: YOLO
 - Train YOLO on labelled images
 - Run the object detector on images or videos
 
@@ -46,11 +44,11 @@ The arguments are:
 
 After executing this script the directory `non_blurry_folder` will contain the non-blurry images that we can train on.
 
-We also provide a script to label images: `label_data.py`. 
+We also provide a script to label images: `label_data.py`.
 
     laptop $ python label_data.py ![input_folder] ![output_folder]
 
-You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes but it can be easily expanded. 
+You need to execute `pip install easygui` if you don't have `easygui` installed. Right now, it allows labelling up to 4 classes but it can be easily expanded.
 The arguments are:
 
 * `input_folder`: directory of images that you want to label
@@ -154,4 +152,3 @@ The `weights_file` is the result of our training. The `threshold` parameter allo
 We can also run inference on a video file, for example a video from the Duckietown logs. However, it needs to be run from a machine with a GPU; otherwise, the frame-per-second rate will be too low.
 
     laptop $ ./darknet detector demo ![data_file] ![architecture_file] ![weights_file] ![input_video]
-
