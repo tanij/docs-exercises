@@ -1,4 +1,4 @@
-# Exercise: Deep learning based VO test {#exercise-deep-vo-test status=beta}
+# Exercise: Deep learning based Visual Odometry test {#exercise-deep-vo-test status=ready}
 
 <div class='requirements' markdown='1'>
 

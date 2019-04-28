@@ -1,4 +1,4 @@
-# Exercise: Using Vicon data {#exercise-Vicon status=beta}
+# Exercise: Using Vicon data {#exercise-Vicon status=ready}
 
 <div class='requirements' markdown='1'>
 

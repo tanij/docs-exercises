@@ -1,9 +1,8 @@
-# Exercise: Traditional VO test {#exercise-traditional_VO-test status=beta}
+# Exercise: Traditional Visual Odometry test {#exercise-traditional_VO-test status=ready}
 
 <div class='requirements' markdown='1'>
 
 Requires: You have finished [](#exercise-data-collect).
-
 
 Result: Predicted poses of test data using Deep learning based VO.
 

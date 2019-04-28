@@ -1,7 +1,5 @@
 # Exercise: Lane Filtering - Particle Filter {#exercise-filtering-pf status=ready}
 
-Assigned: Jonathan Michaux, Liam Paull, and Miguel de la Iglesia
-
 ## Skills learned
 
 * Understanding of basic filtering concepts
@@ -9,11 +7,11 @@ Assigned: Jonathan Michaux, Liam Paull, and Miguel de la Iglesia
 
 ## Introduction
 
-During the lectures, we have discussed general filtering techniques, and specifically the **histogram filtering** approach that we are using to estimate our location within a lane in Duckietown. 
+During the lectures, we have discussed general filtering techniques, and specifically the **histogram filtering** approach that we are using to estimate our location within a lane in Duckietown.
 
-This is a 2-dimensional filter over $d$ and $\theta$, the lateral displacement in the lane and the robot heading relative to the direction of the lane. 
+This is a 2-dimensional filter over $d$ and $\theta$, the lateral displacement in the lane and the robot heading relative to the direction of the lane.
 
-In this exercise, we will replace the histrogram filter with a particle filter. 
+In this exercise, we will replace the histrogram filter with a particle filter.
 
 ## Instructions
 
@@ -22,8 +20,8 @@ Create a ROS node and package that takes as input the list of line segments dete
     duckiebot $ source ![DUCKIETOWN_ROOT]/environment.sh
     duckiebot $ source ![DUCKIETOWN_ROOT]/set_vehicle.name.sh
     duckiebot $ roslaunch dt_filtering_![ROBOT_NAME] lane_following.launch
-    
-and then follow the instructions in [](+fall2017_info#checkoff_navigation) for trying the lane following demo. 
+
+and then follow the instructions in [](+fall2017_info#checkoff_navigation) for trying the lane following demo.
 
 
 You should definitely look at the existing histogram filter for inspiration.
@@ -32,9 +30,9 @@ You may find [this](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Pyt
 
 ### Workflow Tip
 
-While you are working on your node and it is crashing, you need not kill and relaunch the entire stack (or even launch on your robot). You should build a workflow whereby you can quickly launch only the node you are developing from your laptop. 
+While you are working on your node and it is crashing, you need not kill and relaunch the entire stack (or even launch on your robot). You should build a workflow whereby you can quickly launch only the node you are developing from your laptop.
 
 
-## Submission 
+## Submission
 
 Submit the code using location-specific instructions

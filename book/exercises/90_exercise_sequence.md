@@ -1,5 +1,4 @@
-
-# Exercise: Git and conventions {#exercise-git-conventions status=draft}
+# Exercise: Git and conventions {#exercise-git-conventions status=beta}
 
 TODO: move here the exercises we had last year about branching.
 
@@ -14,7 +13,7 @@ TODO: move here the exercises we had last year about branching.
 
 
 
-# Exercise: Use our API for arguments {#exercise-arguments-API status=draft}
+# Exercise: Use our API for arguments {#exercise-arguments-API status=beta}
 
 ## Skills learned
 
@@ -32,7 +31,7 @@ TODO: to write
 
 <!--  -->
 
-# Exercise: Bouncing ball {#exercise-bouncing-ball status=draft}
+# Exercise: Bouncing ball {#exercise-bouncing-ball status=beta}
 
 ## Skills learned
 
@@ -52,7 +51,7 @@ that shows a bouncing ball on the screen, as if it were a billiard
 
 * Our API for command line arguments.
 
-# Exercise: Visualizing data on image {#exercise-visualizing-data status=draft}
+# Exercise: Visualizing data on image {#exercise-visualizing-data status=beta}
 
 ## Skills learned
 
@@ -73,7 +72,7 @@ to a certain color, and creates as the output a big red, yellow white spot on th
 
 <!--  -->
 
-# Exercise: Make that into a node {#exercise-make-node status=draft}
+# Exercise: Make that into a node {#exercise-make-node status=beta}
 
 ## Learned skills
 
@@ -93,7 +92,7 @@ Make a ROS node and two launch files:
 
 <!--  -->
 
-# Exercise: Instagram with EasyAlgo interface  {#exercise-instagram-easy-algo status=draft}
+# Exercise: Instagram with EasyAlgo interface  {#exercise-instagram-easy-algo status=beta}
 
 ## Learned skills
 
@@ -119,7 +118,7 @@ TODO: Also introduce the DUCKIETOWN_CONFIG_SEQUENCE.
 
 
 
-# Milestone: Illumination invariance (anti-instagram) {#milestone-illumination-invariance status=draft}
+# Milestone: Illumination invariance (anti-instagram) {#milestone-illumination-invariance status=beta}
 
 TODO: Make them run our code, and also visualize what's going on
 
@@ -128,7 +127,7 @@ TODO: Make them run our code, and also visualize what's going on
 
 
 
-# Exercise: Launch files basics {#exercise-launch-files status=draft}
+# Exercise: Launch files basics {#exercise-launch-files status=beta}
 
 
 ## Learned skills
@@ -140,7 +139,7 @@ TODO: Make them run our code, and also visualize what's going on
 <!--  -->
 
 
-# Exercise: Unit tests {#exercise-unit-tests status=draft}
+# Exercise: Unit tests {#exercise-unit-tests status=beta}
 
 
 ## Learned skills
@@ -158,21 +157,21 @@ TODO: Make them run our code, and also visualize what's going on
 ## Unite tests with comptests
 
 
-# Exercise: Parameters (standard ROS api) {#exercise-parameters-ROS status=draft}
+# Exercise: Parameters (standard ROS api) {#exercise-parameters-ROS status=beta}
 
 ## Learned skills
 
 - Reading parameters
 - Dynamic modification of parameters
 
-# Exercise: Parameters (our API)  {#exercise-parameters status=draft}
+# Exercise: Parameters (our API)  {#exercise-parameters status=beta}
 
 ## Learned skills
 
 - Use Duckietown API
 
 
-# Exercise: Place recognition abstraction {#exercise-place-recognition status=draft}
+# Exercise: Place recognition abstraction {#exercise-place-recognition status=beta}
 
 ## Learned skills
 
@@ -215,7 +214,7 @@ Compute the similarity matrix for the
 TODO: to write
 
 
-# Exercise: Parallel processing  {#exercise-parallel-proc status=draft}
+# Exercise: Parallel processing  {#exercise-parallel-proc status=beta}
 
 ## Learned skills
 
@@ -226,7 +225,7 @@ TODO: to write
 We introduce the support for parallel processing that we have in the APIs.
 
 
-# Exercise: Adding new test to integration tests  {#exercise-integration-test status=draft}
+# Exercise: Adding new test to integration tests  {#exercise-integration-test status=beta}
 
 TODO: to write
 
@@ -249,19 +248,19 @@ TODO: to write
 
 TODO: to write
 
-# Exercise: localization {#exercise-localization status=draft}
+# Exercise: localization {#exercise-localization status=beta}
 
 TODO: to write
 
 
-# Exercise: Ducks in a row {#exercise-duck-in-arow status=draft}
+# Exercise: Ducks in a row {#exercise-duck-in-arow status=beta}
 
 TODO: to write
 
-# Exercise: Comparison of PID {#exercise-PIDs status=draft}
+# Exercise: Comparison of PID {#exercise-PIDs status=beta}
 
 TODO: to write
 
-# Exercise: RRT {#exercise-RRT status=draft}
+# Exercise: RRT {#exercise-RRT status=beta}
 
 TODO: to write

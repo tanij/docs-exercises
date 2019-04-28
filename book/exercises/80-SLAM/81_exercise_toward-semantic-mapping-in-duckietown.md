@@ -1,26 +1,26 @@
 
-# Exercise: Towards Semantic Mapping in Duckietown: Building a map of Duckietown lanes {#semantic-mappping status=draft}
+# Exercise: Towards Semantic Mapping in Duckietown: Building a map of Duckietown lanes {#semantic-mappping status=ready}
 
 ## Skills learned
 
-* How to associate semantics to the roads in duckietown: represent the world in terms of lines and their colors
+* How to associate semantics to the roads in Duckietown: represent the world in terms of lines and their colors
 * Use a different line detector which can provide descriptors rather than the one from the Software stack
 * Use odometry information to estimate the robot's position
 * Filter spurious lines and smooth odometry estimates
 * Combine odometry and line detections to build a map
-* Visualize the line-based semantic map built by your duckiebot using rviz
+* Visualize the line-based semantic map built by your Duckiebot using rviz
 * Use what you know to make the map better (ongoing)
 
-You can run all of this over your favourite log!
+You can run all of this over your favorite log!
 
 ## Introduction
-In this demo, we aim at building a map of the duckietown roads based on a log previously obtained on a duckiebot.
+In this demo, we aim at building a map of the Duckietown roads based on a log previously obtained on a Duckiebot.
 The idea is to make use of the very controlled environment of Duckietown to help us make our map. Moreover, we want to have semantic meanings in our map which could later on help for different tasks.
 This leads us to building a 2D map of the lanes which compose the roads of Duckietown, which can be improved thanks to the use of prior knowledge of the environment.
 To obtain this map, we use many modules which can be independently modified and are combined using ROS.
 
 ## Expected results
-By the end of this demo, you should be able to visualize a map of the colored lanes which were seen by the duckiebot whose log you are using, as illustrated below:
+By the end of this demo, you should be able to visualize a map of the colored lanes which were seen by the Duckiebot whose log you are using, as illustrated below:
 <figure>
     <figcaption>Examples of expected visualizations at different time steps: </figcaption>
 	<figure>
@@ -39,7 +39,7 @@ By the end of this demo, you should be able to visualize a map of the colored la
 
 ## Instructions
 ### Prerequisites
-As mentioned, we build a map on a log of a duckiebot. To run the following demo, you'll need the following:
+As mentioned, we build a map on a log of a Duckiebot. To run the following demo, you'll need the following:
 
 * An actual _log_ (a `.bag` file), in which the image seen by the robot is recorded (probably using the `ros-picam` node), as well as some source of odometry (in our code we use the published executed wheel commands). Here is a log file you can use which has the required information: [rosbag file](https://drive.google.com/file/d/1L6wHbDHEj4lb9FHX6smMZLZaaE2RdTIl/view?usp=sharing).
 * A computer with _ROS Kinetic_.
@@ -108,9 +108,9 @@ This package is a copy of the `ground_projection` module from the Duckietown sof
 To ensure that the node runs, you must have the following.
 
 1. The robot's (eg. *neo*'s) extrinsic parameters must be placed in `lane-slam/duckietown/config/baseline/calibration/camera_extrinsic/neo.yaml`.  
-2. Edit `lane-slam/src/ground_projection/launch/ground_projection.launch`. Around line 13, where the `ground_projection` node is being launched, set the topic names. `~lineseglist_in` should contain the name of a topic to which line segments detected in an image are published to. (This is, in most cases, the topic to which the `line_detector` node publishes). `~cali_image` should contain a topic onto which the raw image is published (eg. `/neo/camera_node/image/raw`), and `camera_info` is a topic onto which camera info is published (eg. `/neo/camera_node/camera_info`)  
+2. Edit `lane-slam/src/ground_projection/launch/ground_projection.launch`. Around line 13, where the `ground_projection` node is being launched, set the topic names. `~lineseglist_in` should contain the name of a topic to which line segments detected in an image are published to. (This is, in most cases, the topic to which the `line_detector` node publishes). `~cali_image` should contain a topic onto which the raw image is published (e.g. `/neo/camera_node/image/raw`), and `camera_info` is a topic onto which camera info is published (e.g. `/neo/camera_node/camera_info`)  
 
-When this is all set, run the following, replacing `neo` with your duckiebot name.
+When this is all set, run the following, replacing `neo` with your Duckiebot name.
 ```
 roslaunch ground_projection ground_projection.launch veh:=neo
 ```  
@@ -124,7 +124,7 @@ This package takes in _ground-projected_ line segments and _filters out_ spuriou
 
 *Run it:*
 
-To ensure this node works, you need to set up the following topics in `lane-slam/src/line_sanity/launch/line_sanity.launch`. Assume your duckiebot is named *neo*.
+To ensure this node works, you need to set up the following topics in `lane-slam/src/line_sanity/launch/line_sanity.launch`. Assume your Duckiebot is named *neo*.
 
 1. By default, the `line_sanity_node` publishes to the topic `/neo/line_sanity_node/filtered_segments_lsd`.
 If you need it to publish it to another topic, open `line_sanity.launch` (in the `launch` directory of the `line_sanity` package). Around lines 5-7, where the `line_sanity_node` is being launched, add in a remap command.
@@ -149,10 +149,10 @@ If you need it to publish it to another topic, open `line_sanity.launch` (in the
 ### Odometry (`lane_slam/src/odometry`)
 *Explanation:*  
 
-The odometry module's goal is to produce an estimate of the duckiebot's position.
+The odometry module's goal is to produce an estimate of the Duckiebot's position.
 We provide a package which does so based on the `wheels_cmd`, but you can easily replace our package by your one which produces position estimations.
 
-The dynamics of the differential drive which is used on the duckiebots is known and therefore we can use wheel commands to estimate velocity and angle of the duckiebot.  
+The dynamics of the differential drive which is used on the Duckiebots is known and therefore we can use wheel commands to estimate velocity and angle of the Duckiebot.  
 
 We reuse the code provided in this [instructional exercise](https://colab.research.google.com/drive/1atYXVcpD1F7CCZCn6UEO3ps7BUpkJsvO#scrollTo=Qg-9v_zA974X) in our package.
 
@@ -168,7 +168,7 @@ You can run the odometry node and our visualization using the following command,
 roslaunch odometry odometry odometry.launch veh:=$duckiename
 ```
 
-You can check that the frame is well published and read the right values using the folling command in a new terminal :
+You can check that the frame is well published and read the right values using the following command in a new terminal :
 ```
 rosrun tf tf_echo map duck
 ```
@@ -191,7 +191,7 @@ roslaunch show_map show_map_node.launch veh:=duckiebot_name
 With the log and other previous nodes running, you should see the map being built.
 
 ## Future improvements
-There are several ways in which people can extend our codebase. We have built stubs for most of these functionalities.
+There are several ways in which people can extend our code-base. We have built stubs for most of these functionalities.
 
 
 1. *Still better line detection:* Train a neural network to detect lines? Or better, have an ensemble of traditional and learnt components in parallel? This is one avenue where there's a lot of room for improvement.
@@ -204,4 +204,4 @@ Any new line detection method can be implemented as a class in the `line_detecto
 3. *Graph optimization:* One way people can use the odometry provided here is to construct a pose graph using popular graph optimization libraries such as `g2o` and `GTSAM`. _AprilTags_, or other cues that solve the _place recognition_/_relocalization_ problems can be used to induce loop closure constraints, and the optimized graph can result in a much more stable, accurate reconstruction.
 
 
-4. *Prior knowledge:* Extending the above note on graph optimization, one can bake in prior knowledge about _Duckietown_ into the graph optimization pipeline (in two ways). The first way involves imposing prior knowledge at the frontend-level. The _magic filters_ can now take into account priors that stipulate a well-set road line topology (eg. there must only be one yellow strip at the center of the road; other spurious line detections there must be suppressed, etc.). The second way involves imposing prior knowledge as constraints in the backend pose-graph. This could include the constraints that most turns are 90 degrees, or that the same AprilTag is observed, and the like.
+4. *Prior knowledge:* Extending the above note on graph optimization, one can bake in prior knowledge about _Duckietown_ into the graph optimization pipeline (in two ways). The first way involves imposing prior knowledge at the frontend-level. The _magic filters_ can now take into account priors that stipulate a well-set road line topology (e.g. there must only be one yellow strip at the center of the road; other spurious line detections there must be suppressed, etc.). The second way involves imposing prior knowledge as constraints in the back-end pose-graph. This could include the constraints that most turns are 90 degrees, or that the same AprilTag is observed, and the like.
