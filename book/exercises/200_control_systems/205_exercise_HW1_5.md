@@ -12,7 +12,7 @@ For now, we haven't talked explicitly about the delay which is present in our pl
 
 ## Stability - Theory
 
-As you've already seen, the time delay of 70ms does not destabilize our system. By using our calculations from [](#exercise-HW1_1)], we are indeed able to identify a maximal time delay such that our system is still stable in theory. This can be done by having a look at the transfer function of a time-delayed system:
+As you've already seen, the time delay of 70ms does not destabilize our system. By using our calculations from [](#exercise-HW1_1), we are indeed able to identify a maximal time delay such that our system is still stable in theory. This can be done by having a look at the transfer function of a time-delayed system:
 
 $P_d(s) = e^{-sT_d} P(s)$
 
