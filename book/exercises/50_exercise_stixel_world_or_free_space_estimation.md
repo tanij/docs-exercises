@@ -1,4 +1,4 @@
-# Exercise: Free space estimation with Stixel World {status=ready}
+# Exercise: Free space estimation with Stixel World {#stixels status=ready}
 
 Assigned: Laurent Mandrile and David Abraham
 
