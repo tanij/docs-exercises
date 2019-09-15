@@ -2,12 +2,12 @@
 
 ## Skills learned
 
-* implement an LQR controller.
-* understand impacts of weights on control performance and tracking errors.
+* implement a steady-state Linear Quadratic Regulator (LQR).
+* understand impacts of weights in the cost function on control performance.
 
 
 ## LQR controller
-To achieve a better lane following behaviour an LQR controller will be implemented. The structure of a state feedback controller is as follows:
+To achieve a better lane following behavior a LQR controller can be implemented. The structure of a state feedback controller is:
 
 <center>
 <figure>
@@ -15,11 +15,11 @@ To achieve a better lane following behaviour an LQR controller will be implement
 </figure>
 </center>
 
-For the case of an LQR controller the function $f(x(t), t)$ is a constant. Because we are considering the discrete time model of the Duckiebot, the Discrete-time Algebraic Riccati Equation (DARE) has to be solved:
+Because of limited computation resources, we implement a stead-state (or _infinite horizon_) version of the LQR. Because we are considering the discrete time model of the Duckiebot, the Discrete-time Algebraic Riccati Equation (DARE) has to be solved:
 
 $\Phi = A^T\Phi A - (A^T \Phi B)(R+B^T \Phi B)^{-1}(B^T \Phi A)+Q$
 
-To solve this equation use the Python control library (see [python-control.readthedocs.io](https://python-control.readthedocs.io/en/0.8.2/)for documentation)
+To solve this equation use the Python control library (see [python-control.readthedocs.io](https://python-control.readthedocs.io/en/0.8.2/)for documentation).
 
 <center>
 <figure>
@@ -33,4 +33,4 @@ Finish the **controller-lqr.py** file. Test your controller using the command
 
     duckiebot $ make csii-ex3-lqr
 
-and make to normalize your $R$ and $Q$ Matrices. Choose the corresponding weights and tune them until you acheive a satisfying behaviour on the track.
+and make sure to normalize your $R$ and $Q$ Matrices. Choose the corresponding weights and tune them until you achieve a satisfying behavior on the track.
